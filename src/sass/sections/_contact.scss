@@ -1,13 +1,22 @@
 #contact {
-  background-color: $contact-bg;
+  background-color: $bg-dark;
+  background-image: linear-gradient(
+    135deg,
+    $bg-dark 0%,
+    $dark-blue-text 100%
+  );
+  -webkit-clip-path: polygon(0 15vh, 100% 0, 100% 100%, 0 100%);
+  clip-path: polygon(0 15vh, 100% 0, 100% 100%, 0 100%);
   padding: 15rem 0 10rem 0;
   margin-top: -10rem;
   margin-bottom: -1px;
-  color: $dark-blue-text;
+  color: $white-color;
 
   @include respond(tab-land) {
     padding: 10rem 0;
+    clip-path: none;
     margin-top: 0;
+    -webkit-clip-path: none;
   }
 
   .contact-wrapper {
@@ -17,7 +26,6 @@
 
     &__text {
       margin-bottom: 2.5rem;
-      color: $dark-grey;
     }
 
     &__text,
@@ -26,25 +34,6 @@
 
       @include respond(phone) {
         font-size: 2rem;
-      }
-    }
-  }
-
-  /* Light background: “resume” button style was for dark bands */
-  .cta-btn--resume {
-    color: $primary-color;
-    border: 2px solid $primary-color;
-
-    &::after {
-      background: $primary-color;
-    }
-
-    &:hover {
-      color: $white-color;
-      text-decoration: none;
-
-      &::after {
-        width: 100%;
       }
     }
   }
