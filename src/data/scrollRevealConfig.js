@@ -44,6 +44,28 @@ export const targetElements = [
     },
   },
   {
+    element: ".resume-section-title",
+    animation: {
+      delay: 300,
+      origin: "bottom",
+    },
+  },
+  {
+    element: ".resume-item",
+    animation: {
+      delay: 300,
+      origin: "bottom",
+      interval: 100,
+    },
+  },
+  {
+    element: ".resume-skills",
+    animation: {
+      delay: 500,
+      origin: "bottom",
+    },
+  },
+  {
     element: ".project-wrapper__text",
     animation: {
       delay: 500,

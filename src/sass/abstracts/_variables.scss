@@ -1,15 +1,18 @@
-// COLORS
-$primary-color: #02aab0;
-$secondary-color: #00cdac;
+// COLORS — warm cappuccino (light sections; footer uses $dark-blue-text)
+$primary-color: #5c3d2e;
+$secondary-color: #c49a6c;
+$white-color: #fffbf5;
 
-$white-color: #fff;
+$dark-grey: #4a3f37;
+$light-grey: #d9ccbf;
+$dark-blue-text: #2a1810;
 
-$dark-grey: #333333;
-$light-grey: #d2d2d2;
-
-$dark-blue-text: #272341; // For Headings
+// Section-specific backgrounds
+$contact-bg: #f3eae0;
+$resume-bg: #f7f0e8;
+$about-gradient-end: #8b6b54; // milk chocolate — softer gradient end
 
 // FONT SIZE
-$default-font-size: 1.6rem;
-$big-font-size: 4rem;
-$mid-font-size: 2.5rem;
+$default-font-size: 1.8rem;
+$big-font-size: 5rem;
+$mid-font-size: 2.8rem;

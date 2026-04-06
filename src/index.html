@@ -1,14 +1,3 @@
-<!--
-  Hello!
-  -
-  Simplefolio is a clean and responsive portfolio template for Developers!
-  Created by Jacobo Martinez.
-  -
-  Github Repo: https://github.com/cobiwave/simplefolio/
-  Readme: https://github.com/cobiwave/simplefolio/README.md
-  -
-  For business & inquires, contact me -> jacobojavier98@gmail.com
--->
 <!DOCTYPE html>
 <html lang="en" class="sr">
   <head>
@@ -17,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="shortcut icon" type="image/png" href="assets/favicon.png" />
 
-    <!-- Todo: put here your site title -->
     <title>Mateusz Mosór | Portfolio</title>
-    <!-- Todo: add some coding keywords below - e.g: (javascript, yourusername, etc) -->
     <meta name="keywords" content="Attenersi, Mateusz, Alteryx" />
-    <!-- Todo: improve your SEO by adding a small description of you -->
-    <meta name="description" content="Mateusz | Facility Management Analyst" />
+    <meta
+      name="description"
+      content="Mateusz Mosór — Facility Management Analyst specializing in Data Science &amp; AI. Portfolio with projects in Python, Power BI, and machine learning."
+    />
 
     <link
       rel="stylesheet"
@@ -33,12 +22,8 @@
       defer
       src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"
     ></script>
-
-    <!-- Todo: remove the below script once you finish your portfolio -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
   </head>
 
-  <!-- Todo: read the following HTML Todos to create your stunning portfolio website -->
   <body>
     <div id="top"></div>
 
@@ -46,13 +31,16 @@
     <section id="hero" class="jumbotron">
       <div class="container">
         <h1 class="hero-title load-hidden">
-          Hi, my name is <span class="text-color-main">Mateusz</span>
+          I turn <span class="text-color-main">buildings into data</span>
           <br />
-          I'm the Facility Management Analyst.
+          and data into decisions.
         </h1>
         <p class="hero-cta load-hidden">
           <a rel="noreferrer" class="cta-btn cta-btn--hero" href="#about"
-            >Know more</a
+            >About me</a
+          >
+          <a rel="noreferrer" class="cta-btn cta-btn--hero" href="#resume"
+            >My Resume</a
           >
         </p>
       </div>
@@ -72,20 +60,22 @@
                 height="auto"
                 width="300px"
                 src="assets/profile.jpg"
-                alt="Profile Image"
               />
             </div>
           </div>
           <div class="col-md-6 col-sm-12">
             <div class="about-wrapper__info load-hidden">
               <p class="about-wrapper__info-text">
-                Hi, I'm Mateusz Mosór. I am a fourth-year Facility Management student at Breda University of Applied Sciences,
-                 recently completing an intensive minor in Data Science & AI. My journey is defined by adaptability:
-                  starting with just a little Data Analysis background, I successfully transitioned into the world of data, learning throughout my journey tools
-                   like Python, Alteryx, and Power BI.
+                Hi, I'm Mateusz Mosór — a final-year Facility Management student
+                at Breda University of Applied Sciences with a specialization in
+                Data Science &amp; AI. I combine operational know-how from years
+                in logistics with data skills in Python, Alteryx, and Power BI.
               </p>
               <p class="about-wrapper__info-text">
-                My hobbies are competitive e-sport, gaming, football, and traveling. I love exploring new cultures and places.
+                I've interned at Avolta in Helsinki working on financial analysis
+                and KPI reporting, and built production-ready ML applications during
+                my studies. Outside of work, I'm into competitive esports,
+                football, and traveling.
               </p>
               <span class="d-flex mt-3">
                 <a
@@ -104,87 +94,215 @@
     </section>
     <!-- /END About Section -->
 
+    <!-- **** Resume Section **** -->
+    <section id="resume">
+      <div class="container">
+        <h2 class="section-title dark-blue-text load-hidden">Resume</h2>
+
+        <div class="resume-wrapper">
+          <div class="text-center mb-5">
+            <a
+              rel="noreferrer"
+              target="_blank"
+              class="cta-btn cta-btn--resume"
+              href="assets/resume.pdf"
+            >
+              <i class="fa fa-download"></i> Download PDF
+            </a>
+          </div>
+
+          <div class="row">
+            <!-- Left column: Experience -->
+            <div class="col-lg-6 col-sm-12">
+              <h3 class="resume-section-title load-hidden">
+                <i class="fa fa-briefcase"></i> Experience
+              </h3>
+
+              <div class="resume-timeline">
+                <div class="resume-item load-hidden">
+                  <div class="resume-item__date">Feb 2024 – Aug 2024</div>
+                  <h4 class="resume-item__title">Finance Department Intern</h4>
+                  <p class="resume-item__company">Avolta · Helsinki, Finland</p>
+                  <p class="resume-item__description">
+                    Prepared weekly financial and KPI reports. Conducted passenger
+                    data analysis (forecasted vs actual) to optimize scheduling.
+                    Automated Excel templates for financial data management.
+                    Created onboarding documentation.
+                  </p>
+                </div>
+
+                <div class="resume-item load-hidden">
+                  <div class="resume-item__date">Sep 2022 – Present</div>
+                  <h4 class="resume-item__title">All-round Logistics Employee</h4>
+                  <p class="resume-item__company">
+                    Jumbo Supermarkten · Breda, Netherlands
+                  </p>
+                  <p class="resume-item__description">
+                    Task allocation for teams of 50–100 employees. Operational data
+                    analysis and reporting. Documentation management and WMS
+                    operations.
+                  </p>
+                </div>
+
+                <div class="resume-item load-hidden">
+                  <div class="resume-item__date">Nov 2020 – Sep 2022</div>
+                  <h4 class="resume-item__title">Baliemedewerker (Front Desk)</h4>
+                  <p class="resume-item__company">
+                    Jumbo Supermarkten · Breda, Netherlands
+                  </p>
+                  <p class="resume-item__description">
+                    Office inventory oversight, documentation management, data
+                    analysis &amp; reporting, Warehouse Management System (WMS)
+                    operations.
+                  </p>
+                </div>
+
+                <div class="resume-item load-hidden">
+                  <div class="resume-item__date">Jun 2019 – Nov 2020</div>
+                  <h4 class="resume-item__title">Reach Truck Operator</h4>
+                  <p class="resume-item__company">
+                    Jumbo Supermarkten · Breda, Netherlands
+                  </p>
+                  <p class="resume-item__description">
+                    Operated reach trucks across the distribution centre. Trained
+                    new employees in safe operation procedures.
+                  </p>
+                </div>
+
+                <div class="resume-item load-hidden">
+                  <div class="resume-item__date">Jan 2017 – Jun 2017</div>
+                  <h4 class="resume-item__title">Logistics Employee</h4>
+                  <p class="resume-item__company">KODANO S.A. · Kraków, Poland</p>
+                  <p class="resume-item__description">
+                    Cross-border restocking with Hungarian branch. Order picking,
+                    parcel preparation, international shipment.
+                  </p>
+                </div>
+
+                <div class="resume-item load-hidden">
+                  <div class="resume-item__date">Sep 2015 – Nov 2015</div>
+                  <h4 class="resume-item__title">Service Employee</h4>
+                  <p class="resume-item__company">SKK S.A. · Kraków, Poland</p>
+                  <p class="resume-item__description">
+                    Equipment service coordination — receiving, condition
+                    assessment, repair routing, documentation, and shipping.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right column: Education, Skills, Languages, Certifications -->
+            <div class="col-lg-6 col-sm-12">
+              <h3 class="resume-section-title load-hidden">
+                <i class="fa fa-graduation-cap"></i> Education
+              </h3>
+
+              <div class="resume-timeline">
+                <div class="resume-item load-hidden">
+                  <div class="resume-item__date">Sep 2022 – Jun 2026</div>
+                  <h4 class="resume-item__title">
+                    BSc International Facility Management
+                  </h4>
+                  <p class="resume-item__company">
+                    Breda University of Applied Sciences
+                  </p>
+                  <p class="resume-item__description">
+                    Specialization: Data Science &amp; AI. Minor covering machine
+                    learning, data engineering, and AI applications.
+                  </p>
+                </div>
+
+                <div class="resume-item load-hidden">
+                  <div class="resume-item__date">Sep 2010 – Jun 2014</div>
+                  <h4 class="resume-item__title">Economist Technician</h4>
+                  <p class="resume-item__company">
+                    Zespół Szkół Ekonomicznych Nr 2 · Kraków
+                  </p>
+                  <p class="resume-item__description">
+                    Economics with foundation in business and financial analysis.
+                  </p>
+                </div>
+              </div>
+
+              <h3 class="resume-section-title mt-5 load-hidden">
+                <i class="fa fa-code"></i> Skills
+              </h3>
+              <div class="resume-skills load-hidden">
+                <div class="resume-skill-tag">Python</div>
+                <div class="resume-skill-tag">Power BI</div>
+                <div class="resume-skill-tag">Alteryx</div>
+                <div class="resume-skill-tag">Excel</div>
+                <div class="resume-skill-tag">SQL</div>
+                <div class="resume-skill-tag">DAX</div>
+                <div class="resume-skill-tag">Tableau</div>
+                <div class="resume-skill-tag">XGBoost</div>
+                <div class="resume-skill-tag">Streamlit</div>
+                <div class="resume-skill-tag">Plotly</div>
+                <div class="resume-skill-tag">Git</div>
+              </div>
+
+              <h3 class="resume-section-title mt-5 load-hidden">
+                <i class="fa fa-language"></i> Languages
+              </h3>
+              <div class="resume-skills load-hidden">
+                <div class="resume-skill-tag">Polish – Native</div>
+                <div class="resume-skill-tag">English – Professional</div>
+                <div class="resume-skill-tag">Dutch – Elementary</div>
+              </div>
+
+              <h3 class="resume-section-title mt-5 load-hidden">
+                <i class="fa fa-certificate"></i> Certifications
+              </h3>
+              <div class="resume-skills load-hidden">
+                <div class="resume-skill-tag">Lean Six Sigma Yellow Belt</div>
+                <div class="resume-skill-tag">MS Office Specialist: Excel</div>
+                <div class="resume-skill-tag">Alteryx Designer Core</div>
+                <div class="resume-skill-tag">Alteryx ML Fundamentals</div>
+                <div class="resume-skill-tag">Tableau Essential Training</div>
+                <div class="resume-skill-tag">Excel PivotTables</div>
+                <div class="resume-skill-tag">Career Skills in Data Analytics</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- /END Resume Section -->
+
     <!-- **** Projects Section **** -->
     <section id="projects">
       <div class="container">
         <div class="project-wrapper">
           <h2 class="section-title dark-blue-text">Projects</h2>
 
-          <!-- Notice: each .row is a project -->
-          <div class="row">
-            <div class="col-lg-4 col-sm-12">
-            <div class="project-wrapper__text load-hidden">
-                <h3 class="project-wrapper__text-title">Nuclear Energy SDG Dashboard</h3>
-                <div>
-                  <p class="mb-4">
-                    A deep-dive data analysis into the correlation between nuclear energy adoption and carbon intensity in Europe.
-                    <br /><br />
-                    <strong>Insight:</strong> Discovered a moderate negative correlation (-0.40) between nuclear shares and carbon intensity.
-                    <br />
-                    <strong>Tools:</strong> Power BI, DAX, Excel.
-                  </p>
-                </div>
-                <a
-                  rel="noreferrer"
-                  target="_blank"
-                  class="cta-btn cta-btn--hero"
-                  href="#!"
-                >
-                  See Live
-                </a>
-                <a
-                  rel="noreferrer"
-                  target="_blank"
-                  class="cta-btn text-color-main"
-                  href="#!"
-                >
-                  Source Code
-                </a>
-              </div>
-            </div>
-            <div class="col-lg-8 col-sm-12">
-              <div class="project-wrapper__image load-hidden">
-                <a rel="noreferrer" href="#!" target="_blank">
-                  <div
-                    data-tilt
-                    data-tilt-max="4"
-                    data-tilt-glare="true"
-                    data-tilt-max-glare="0.5"
-                    class="thumbnail rounded js-tilt"
-                  >
-                    <img
-                      alt="Project Image"
-                      class="img-fluid"
-                      src="assets/sdg.jpg"
-                    />
-                  </div>
-                </a>
-              </div>
-            </div>
-          </div>
-          <!-- /END Project -->
-
-          <!-- Notice: each .row is a project -->
           <div class="row">
             <div class="col-lg-4 col-sm-12">
               <div class="project-wrapper__text load-hidden">
-                <h3 class="project-wrapper__text-title">Intelligent Occupancy Detection</h3>
+                <h3 class="project-wrapper__text-title">
+                  Intelligent Occupancy Detection
+                </h3>
                 <div>
                   <p class="mb-4">
-                    A production-ready Machine Learning application designed to predict room occupancy using environmental sensor data.
+                    A production-ready Machine Learning web app that predicts
+                    real-time room occupancy using environmental sensor data
+                    (temperature, humidity, CO2, light).
                     <br /><br />
-                    <strong>Architecture:</strong> Built a "Champion vs. Challenger" MLOps framework to validate new models against the production model.
+                    <strong>ML Pipeline:</strong> Automated data cleaning,
+                    feature engineering, and model serialization with a Champion
+                    vs. Challenger validation framework.
                     <br />
-                    <strong>Engineering:</strong> Automated pipeline for cleaning, feature engineering, and serialization.
+                    <strong>Model:</strong> XGBoost classifier achieving high
+                    accuracy on unseen data.
                     <br />
-                    <strong>Tech Stack:</strong> Python, Streamlit, XGBoost, Plotly.
+                    <strong>Stack:</strong> Python, Streamlit, XGBoost, Plotly,
+                    Pandas.
                   </p>
                 </div>
                 <a
                   rel="noreferrer"
                   target="_blank"
                   class="cta-btn cta-btn--hero"
-                  href="https://office-occupancy-app.streamlit.app/" 
+                  href="https://office-occupancy-app.streamlit.app/"
                 >
                   See Live
                 </a>
@@ -200,7 +318,11 @@
             </div>
             <div class="col-lg-8 col-sm-12">
               <div class="project-wrapper__image load-hidden">
-                <a rel="noreferrer" href="#!" target="_blank">
+                <a
+                  rel="noreferrer"
+                  href="https://office-occupancy-app.streamlit.app/"
+                  target="_blank"
+                >
                   <div
                     data-tilt
                     data-tilt-max="4"
@@ -209,7 +331,7 @@
                     class="thumbnail rounded js-tilt"
                   >
                     <img
-                      alt="Project Image"
+                      alt="Occupancy Detection App"
                       class="img-fluid"
                       src="assets/occupancy.jpg"
                     />
@@ -220,56 +342,84 @@
           </div>
           <!-- /END Project -->
 
-          <!-- Notice: each .row is a project -->
           <div class="row">
             <div class="col-lg-4 col-sm-12">
               <div class="project-wrapper__text load-hidden">
-                <h3 class="project-wrapper__text-title">DKG Logistics Optimization</h3>
+                <h3 class="project-wrapper__text-title">
+                  Nuclear Energy SDG Dashboard
+                </h3>
                 <div>
                   <p class="mb-4">
-                    <strong>Client Project for DKG Keukens</strong>
+                    Interactive Power BI dashboard analyzing the relationship
+                    between nuclear energy adoption and carbon intensity across
+                    European countries.
                     <br /><br />
-                    <strong>Challenge:</strong> Optimizing truck loading for mixed cargo (heavy/fragile cabinets).
+                    <strong>Insight:</strong> Identified a moderate negative
+                    correlation (-0.40) — countries with higher nuclear shares
+                    tend to have lower carbon intensity.
                     <br />
-                    <strong>Solution:</strong> Pivoted from unstable ML models to a Heuristic Algorithm approach. Developed a front-end application to visualize 3D packing plans and ensured safety compliance via an Ethical Operations Framework.
+                    <strong>Tools:</strong> Power BI, DAX, Excel.
                   </p>
                 </div>
-                <a
-                  rel="noreferrer"
-                  target="_blank"
-                  class="cta-btn cta-btn--hero"
-                  href="#!"
-                >
-                  See Live
-                </a>
-                
-                <a
-                  rel="noreferrer"
-                  target="_blank"
-                  class="cta-btn text-color-main"
-                  href="#!"
-                >
-                  Source Code
-                </a>
               </div>
             </div>
             <div class="col-lg-8 col-sm-12">
               <div class="project-wrapper__image load-hidden">
-                <a rel="noreferrer" href="#!" target="_blank">
-                  <div
-                    data-tilt
-                    data-tilt-max="4"
-                    data-tilt-glare="true"
-                    data-tilt-max-glare="0.5"
-                    class="thumbnail rounded js-tilt"
-                  >
-                    <img
-                      alt="Project Image"
-                      class="img-fluid"
-                      src="assets/optimization.jpg"
-                    />
-                  </div>
-                </a>
+                <div
+                  data-tilt
+                  data-tilt-max="4"
+                  data-tilt-glare="true"
+                  data-tilt-max-glare="0.5"
+                  class="thumbnail rounded js-tilt"
+                >
+                  <img
+                    alt="SDG Dashboard"
+                    class="img-fluid"
+                    src="assets/sdg.jpg"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /END Project -->
+
+          <div class="row">
+            <div class="col-lg-4 col-sm-12">
+              <div class="project-wrapper__text load-hidden">
+                <h3 class="project-wrapper__text-title">
+                  DKG Logistics Optimization
+                </h3>
+                <div>
+                  <p class="mb-4">
+                    <strong>Client project for DKG Keukens</strong> — optimizing
+                    truck loading for mixed cargo of heavy and fragile kitchen
+                    cabinets.
+                    <br /><br />
+                    <strong>Approach:</strong> After evaluating ML models,
+                    pivoted to a Heuristic Algorithm that proved more reliable
+                    for real-world constraints.
+                    <br />
+                    <strong>Delivery:</strong> Front-end 3D packing visualization
+                    with safety compliance via an Ethical Operations Framework.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-8 col-sm-12">
+              <div class="project-wrapper__image load-hidden">
+                <div
+                  data-tilt
+                  data-tilt-max="4"
+                  data-tilt-glare="true"
+                  data-tilt-max-glare="0.5"
+                  class="thumbnail rounded js-tilt"
+                >
+                  <img
+                    alt="DKG Optimization"
+                    class="img-fluid"
+                    src="assets/optimization.jpg"
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -284,13 +434,15 @@
       <div class="container">
         <h2 class="section-title">Contact</h2>
         <div class="contact-wrapper load-hidden">
-          <p class="contact-wrapper__text">[Put your call to action here]</p>
+          <p class="contact-wrapper__text">
+            Interested in working together? Let's talk.
+          </p>
           <a
             rel="noreferrer"
             target="_blank"
             class="cta-btn cta-btn--resume"
-            href="mailto:example@email.com"
-            >Call to Action</a
+            href="mailto:mosorm@gmail.com"
+            >Get in Touch</a
           >
         </div>
       </div>
@@ -304,48 +456,31 @@
           <i class="fa fa-angle-up fa-2x" aria-hidden="true"></i>
         </a>
         <div class="social-links">
-          <a rel="noreferrer" href="#!" target="_blank">
-            <i class="fa fa-twitter fa-inverse"></i>
-          </a>
-          <a rel="noreferrer" href="#!" target="_blank">
+          <a
+            rel="noreferrer"
+            href="https://www.linkedin.com/in/mateuszmosór-2b099423b"
+            target="_blank"
+          >
             <i class="fa fa-linkedin fa-inverse"></i>
           </a>
-          <a rel="noreferrer" href="#!" target="_blank">
+          <a
+            rel="noreferrer"
+            href="https://github.com/Attenersi"
+            target="_blank"
+          >
             <i class="fa fa-github fa-inverse"></i>
           </a>
         </div>
 
         <hr />
 
-        <!-- Notice: if you want to give me some credit, it will be huge for me! if not, put your data on it -->
         <p class="footer__text">
-          © 2021 - Template developed by
-          <a rel="noreferrer" href="https://github.com/cobiwave" target="_blank"
-            >Jacobo Martínez</a
-          >
-        </p>
-
-        <!-- TO DO: remove this entire paragraph once you finish your portfolio -->
-        <p class="mt-3 pt-3">
+          © 2025 Mateusz Mosór. Built with
           <a
             rel="noreferrer"
-            class="github-button"
-            href="https://github.com/cobiwave/simplefolio/fork"
-            data-icon="octicon-repo-forked"
-            data-size="large"
-            data-show-count="true"
-            aria-label="Fork ntkme/github-buttons on GitHub"
-            >Fork</a
-          >
-          <a
-            rel="noreferrer" 
-            class="github-button"
             href="https://github.com/cobiwave/simplefolio"
-            data-icon="octicon-star"
-            data-size="large"
-            data-show-count="true"
-            aria-label="Star cobiwave/simplefolio on GitHub"
-            >Star</a
+            target="_blank"
+            >Simplefolio</a
           >
         </p>
       </div>
