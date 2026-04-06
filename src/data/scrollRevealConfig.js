@@ -55,13 +55,12 @@ export const targetElements = [
     animation: {
       delay: 300,
       origin: "bottom",
-      interval: 100,
     },
   },
   {
     element: ".resume-skills",
     animation: {
-      delay: 500,
+      delay: 300,
       origin: "bottom",
     },
   },

@@ -28,6 +28,15 @@
 .resume-wrapper {
   max-width: 900px;
   margin: 0 auto;
+
+  > .row {
+    align-items: flex-start;
+  }
+
+  > .row > [class*="col-lg-"] {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .resume-section-title {

@@ -318,25 +318,23 @@
             </div>
             <div class="col-lg-8 col-sm-12">
               <div class="project-wrapper__image load-hidden">
-                <a
-                  rel="noreferrer"
-                  href="https://office-occupancy-app.streamlit.app/"
-                  target="_blank"
+                <div
+                  data-tilt
+                  data-tilt-max="4"
+                  data-tilt-glare="true"
+                  data-tilt-max-glare="0.5"
+                  class="thumbnail rounded js-tilt"
                 >
-                  <div
-                    data-tilt
-                    data-tilt-max="4"
-                    data-tilt-glare="true"
-                    data-tilt-max-glare="0.5"
-                    class="thumbnail rounded js-tilt"
-                  >
-                    <img
-                      alt="Occupancy Detection App"
-                      class="img-fluid"
-                      src="assets/occupancy.jpg"
-                    />
-                  </div>
-                </a>
+                  <img
+                    alt="Occupancy Detection App"
+                    class="img-fluid"
+                    src="assets/occupancy.jpg"
+                  />
+                </div>
+                <div class="gallery-images" style="display: none">
+                  <img src="assets/occupancy.jpg" />
+                  <img src="assets/occupancy_2.png" />
+                </div>
               </div>
             </div>
           </div>
@@ -377,6 +375,13 @@
                     class="img-fluid"
                     src="assets/sdg.jpg"
                   />
+                </div>
+                <div class="gallery-images" style="display: none">
+                  <img src="assets/sdg.jpg" />
+                  <img src="assets/sdg_2.png" />
+                  <img src="assets/sdg_3.png" />
+                  <img src="assets/sdg_4.png" />
+                  <img src="assets/sdg_5.png" />
                 </div>
               </div>
             </div>
@@ -419,6 +424,12 @@
                     class="img-fluid"
                     src="assets/optimization.jpg"
                   />
+                </div>
+                <div class="gallery-images" style="display: none">
+                  <img src="assets/optimization.jpg" />
+                  <img src="assets/optimization_2.png" />
+                  <img src="assets/optimization_3.png" />
+                  <img src="assets/optimization_4.png" />
                 </div>
               </div>
             </div>
@@ -486,6 +497,108 @@
       </div>
     </footer>
     <!-- /END Footer Section -->
+
+    <!-- Gallery Lightbox -->
+    <div
+      id="lightbox"
+      style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.92); z-index:9999; justify-content:center; align-items:center; flex-direction:column;"
+    >
+      <span
+        id="lb-close"
+        style="position:absolute; top:20px; right:30px; color:#fff; font-size:36px; cursor:pointer; font-family:Arial; z-index:10001;"
+        >&times;</span>
+      <span
+        id="lb-prev"
+        style="position:absolute; left:20px; top:50%; transform:translateY(-50%); color:#fff; font-size:48px; cursor:pointer; font-family:Arial; user-select:none; z-index:10001;"
+        >&#8249;</span>
+      <span
+        id="lb-next"
+        style="position:absolute; right:20px; top:50%; transform:translateY(-50%); color:#fff; font-size:48px; cursor:pointer; font-family:Arial; user-select:none; z-index:10001;"
+        >&#8250;</span>
+      <img
+        id="lb-img"
+        style="max-width:85%; max-height:80%; border-radius:12px; object-fit:contain; transition:opacity 0.2s ease;"
+      />
+      <div
+        id="lb-counter"
+        style="color:#aaa; font-size:14px; margin-top:12px; font-family:Arial;"
+      ></div>
+    </div>
+
+    <script>
+      (function () {
+        var gallery = [];
+        var currentIndex = 0;
+
+        var lightbox = document.getElementById("lightbox");
+        var lbImg = document.getElementById("lb-img");
+        var lbCounter = document.getElementById("lb-counter");
+
+        function showImage(i) {
+          currentIndex = i;
+          lbImg.style.opacity = "0";
+          setTimeout(function () {
+            lbImg.src = gallery[i];
+            lbImg.style.opacity = "1";
+          }, 150);
+          lbCounter.textContent = i + 1 + " / " + gallery.length;
+        }
+
+        document.getElementById("lb-close").addEventListener("click", function () {
+          lightbox.style.display = "none";
+        });
+
+        lightbox.addEventListener("click", function (e) {
+          if (e.target === lightbox) lightbox.style.display = "none";
+        });
+
+        document.getElementById("lb-prev").addEventListener("click", function (e) {
+          e.stopPropagation();
+          showImage(currentIndex > 0 ? currentIndex - 1 : gallery.length - 1);
+        });
+
+        document.getElementById("lb-next").addEventListener("click", function (e) {
+          e.stopPropagation();
+          showImage(
+            currentIndex < gallery.length - 1 ? currentIndex + 1 : 0
+          );
+        });
+
+        document.addEventListener("keydown", function (e) {
+          if (lightbox.style.display !== "flex") return;
+          if (e.key === "ArrowRight")
+            showImage(
+              currentIndex < gallery.length - 1 ? currentIndex + 1 : 0
+            );
+          if (e.key === "ArrowLeft")
+            showImage(
+              currentIndex > 0 ? currentIndex - 1 : gallery.length - 1
+            );
+          if (e.key === "Escape") lightbox.style.display = "none";
+        });
+
+        document
+          .querySelectorAll(".project-wrapper__image .thumbnail img")
+          .forEach(function (img) {
+            img.style.cursor = "zoom-in";
+            img.addEventListener("click", function (e) {
+              e.preventDefault();
+              e.stopPropagation();
+              var wrapper = this.closest(".project-wrapper__image");
+              var hiddenImgs = wrapper.querySelectorAll(".gallery-images img");
+              gallery = Array.from(hiddenImgs).map(function (i) {
+                return i.src;
+              });
+              if (gallery.length === 0) gallery = [this.src];
+              currentIndex = 0;
+              lbImg.src = gallery[0];
+              lbImg.style.opacity = "1";
+              lbCounter.textContent = "1 / " + gallery.length;
+              lightbox.style.display = "flex";
+            });
+          });
+      })();
+    </script>
 
     <script defer type="module" src="index.js"></script>
   </body>
