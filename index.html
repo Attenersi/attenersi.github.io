@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mateusz Mosór — Portfolio · Issue 01</title>
+<meta name="description" content="Mateusz Mosór. Facility Management graduate with a Data Science minor. Selected work in machine learning, BI, and operations research.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F2EDE3;
+    --bg-alt: #EAE3D5;
+    --ink: #141210;
+    --ink-soft: #2A2622;
+    --muted: #786E60;
+    --accent: #A53A1B;
+    --rule: rgba(20, 18, 16, 0.18);
+    --rule-strong: rgba(20, 18, 16, 0.85);
+    --grain-opacity: 0.55;
+
+    --font-display: 'Instrument Serif', Georgia, serif;
+    --font-body: 'Geist', system-ui, sans-serif;
+    --font-mono: 'Geist Mono', ui-monospace, monospace;
+
+    --max-w: 1320px;
+    --gutter: clamp(1.25rem, 3vw, 3rem);
+  }
+
+  body.dark {
+    --bg: #14110E;
+    --bg-alt: #1F1A14;
+    --ink: #E8DDC8;
+    --ink-soft: #C9BDA8;
+    --muted: #8A7E6B;
+    --accent: #D4684A;
+    --rule: rgba(232, 221, 200, 0.18);
+    --rule-strong: rgba(232, 221, 200, 0.85);
+    --grain-opacity: 0;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    transition: background-color .35s ease, color .35s ease;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+    opacity: var(--grain-opacity);
+    mix-blend-mode: multiply;
+    transition: opacity .35s ease;
+  }
+
+  .container { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--gutter); position: relative; z-index: 2; }
+
+  ::selection { background: var(--accent); color: var(--bg); }
+
+  .masthead {
+    border-top: 6px double var(--rule-strong);
+    border-bottom: 1px solid var(--rule-strong);
+    padding: 0.85rem 0;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .masthead-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .masthead-nav-wrap { display: flex; align-items: center; gap: 1.75rem; }
+  .masthead nav a {
+    color: var(--ink);
+    text-decoration: none;
+    margin-left: 1.5rem;
+    transition: color .2s;
+  }
+  .masthead nav a:first-child { margin-left: 0; }
+  .masthead nav a:hover { color: var(--accent); }
+
+  .theme-toggle {
+    background: transparent;
+    border: 1px solid var(--rule-strong);
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    padding: 0.4rem 0.7rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color .2s, color .2s;
+  }
+  .theme-toggle:hover { background: var(--ink); color: var(--bg); }
+
+  @media (max-width: 720px) {
+    .masthead-nav-wrap { width: 100%; flex-wrap: wrap; gap: 0.75rem; }
+    .masthead nav a { margin-left: 0; margin-right: 1rem; }
+  }
+
+  .hero {
+    padding: clamp(3rem, 8vw, 7rem) 0 clamp(2.5rem, 6vw, 5rem);
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+  }
+  .kicker {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.75rem;
+  }
+  .kicker::before { content: ''; width: 32px; height: 1px; background: var(--accent); }
+
+  .hero-headline {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(2.75rem, 9vw, 8.5rem);
+    line-height: 0.96;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 3rem;
+  }
+  .hero-headline em { font-style: italic; color: var(--accent); }
+
+  .hero-meta {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem 2rem;
+    border-top: 1px solid var(--rule-strong);
+    padding-top: 1.25rem;
+  }
+  .hero-meta-item {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .hero-meta-item strong {
+    display: block;
+    color: var(--ink);
+    font-weight: 500;
+    margin-top: 0.45rem;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+  }
+  @media (max-width: 760px) { .hero-meta { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 420px) { .hero-meta { grid-template-columns: 1fr; } }
+
+  .contents {
+    padding: clamp(3rem, 6vw, 5rem) 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1.25rem;
+  }
+  .contents-list { list-style: none; }
+  .contents-list li {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.85rem 0;
+    border-bottom: 1px dotted var(--rule-strong);
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 3vw, 2.25rem);
+  }
+  .contents-list a {
+    color: var(--ink);
+    text-decoration: none;
+    transition: color .2s, font-style .2s;
+  }
+  .contents-list a:hover { color: var(--accent); font-style: italic; }
+  .contents-num { font-family: var(--font-mono); font-size: 0.55em; color: var(--muted); }
+  .contents-page { font-family: var(--font-mono); font-size: 0.45em; color: var(--muted); }
+
+  .article {
+    padding: clamp(4rem, 8vw, 7rem) 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .article-num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .article-headline {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(2.25rem, 5.5vw, 4.5rem);
+    line-height: 1.02;
+    letter-spacing: -0.018em;
+    margin-bottom: 2.5rem;
+    max-width: 16ch;
+  }
+  .article-headline em { font-style: italic; color: var(--accent); }
+
+  .article-body {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  @media (max-width: 760px) { .article-body { grid-template-columns: 1fr; gap: 2rem; } }
+
+  .article-aside {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    line-height: 1.8;
+    border-top: 1px solid var(--rule-strong);
+    padding-top: 1rem;
+  }
+  .article-aside-row + .article-aside-row { margin-top: 1.1rem; }
+  .article-aside strong {
+    color: var(--ink);
+    display: block;
+    margin-top: 0.4rem;
+    font-weight: 500;
+  }
+
+  .prose p {
+    font-size: 18px;
+    line-height: 1.65;
+    margin-bottom: 1.25rem;
+    color: var(--ink-soft);
+  }
+  .prose p:first-of-type::first-letter {
+    font-family: var(--font-display);
+    font-size: 5.5rem;
+    line-height: 0.85;
+    float: left;
+    padding: 0.4rem 0.75rem 0 0;
+    color: var(--accent);
+  }
+
+  .pull-quote {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(1.6rem, 3.2vw, 2.5rem);
+    line-height: 1.18;
+    color: var(--ink);
+    padding: 1.5rem 0 1.5rem 1.75rem;
+    margin: 2rem 0;
+    border-left: 2px solid var(--accent);
+    max-width: 30ch;
+  }
+
+  .work-header { padding: clamp(4rem, 8vw, 7rem) 0 1rem; }
+  .work-header h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .work-header h2 em { font-style: italic; color: var(--accent); }
+
+  .case {
+    padding: clamp(3rem, 6vw, 5rem) 0;
+    border-top: 1px solid var(--rule-strong);
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 3rem;
+  }
+  @media (max-width: 880px) { .case { grid-template-columns: 1fr; gap: 2rem; } }
+
+  .case-meta { align-self: start; }
+  .case-num {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 6vw, 5rem);
+    line-height: 1;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+  .case-num em { font-style: italic; }
+  .case-category {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+  }
+  .case-headline {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(1.85rem, 3.6vw, 2.75rem);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    margin-bottom: 1.5rem;
+  }
+  .case-headline em { font-style: italic; }
+  .case-lede {
+    font-size: 16.5px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    margin-bottom: 2rem;
+  }
+
+  .case-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 1rem 1.5rem;
+    border-top: 1px solid var(--rule-strong);
+    border-bottom: 1px solid var(--rule-strong);
+    padding: 1.25rem 0;
+    margin-bottom: 1.75rem;
+  }
+  .case-metric-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.4rem;
+  }
+  .case-metric-value {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    line-height: 1.1;
+    color: var(--ink);
+  }
+
+  .case-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.75rem; }
+  .case-stack span {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    padding: 0.4rem 0.7rem;
+    border: 1px solid var(--rule-strong);
+    color: var(--ink);
+  }
+
+  .case-actions { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .case-actions a {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 2px;
+    transition: color .2s, border-color .2s;
+  }
+  .case-actions a:hover { color: var(--accent); border-color: var(--accent); }
+  .case-actions a::after { content: ' →'; }
+
+  .case-image {
+    background: var(--bg-alt);
+    border: 1px solid var(--rule-strong);
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+    padding: clamp(0.85rem, 2vw, 1.5rem);
+  }
+  .case-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    filter: saturate(0.92) contrast(1.02);
+    transition: filter .4s ease, transform .8s ease;
+  }
+  .case-image:hover img { filter: saturate(1) contrast(1); transform: scale(1.02); }
+  .case-caption {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 0.7rem;
+  }
+
+  .case-embed {
+    padding: 0 0 clamp(3rem, 6vw, 5rem);
+    border-bottom: 1px solid var(--rule-strong);
+  }
+  .case-embed-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .case-embed-label .live-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-right: 0.5rem;
+    animation: pulse 1.8s ease-in-out infinite;
+    vertical-align: middle;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+  .case-embed-label a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 1px;
+  }
+  .case-embed-label a:hover { color: var(--accent); border-color: var(--accent); }
+  .case-iframe-wrap {
+    border: 1px solid var(--rule-strong);
+    background: var(--bg-alt);
+    overflow: hidden;
+    position: relative;
+  }
+  .case-iframe-wrap iframe {
+    width: 100%;
+    height: 720px;
+    border: none;
+    display: block;
+    background: #FFF;
+  }
+  @media (max-width: 720px) {
+    .case-iframe-wrap iframe { height: 560px; }
+  }
+
+  .stack {
+    padding: clamp(4rem, 8vw, 7rem) 0;
+    border-top: 6px double var(--rule-strong);
+    border-bottom: 1px solid var(--rule);
+  }
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 3rem 2rem;
+    margin-top: 2.5rem;
+  }
+  .stack-col h4 {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--rule-strong);
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+  .stack-col ul { list-style: none; }
+  .stack-col li {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+
+  .career {
+    padding: clamp(4rem, 8vw, 7rem) 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .career-list { margin-top: 2.5rem; }
+  .career-row {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 2rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: baseline;
+  }
+  @media (max-width: 700px) { .career-row { grid-template-columns: 1fr; gap: 0.4rem; } }
+  .career-when {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .career-what h5 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1.1;
+    margin-bottom: 0.3rem;
+  }
+  .career-where {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+  }
+  .career-detail {
+    margin-top: 0.5rem;
+    color: var(--ink-soft);
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .colophon {
+    padding: clamp(4rem, 8vw, 7rem) 0 3rem;
+    border-top: 6px double var(--rule-strong);
+    text-align: center;
+  }
+  .colophon-headline {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(1.85rem, 5vw, 3.5rem);
+    line-height: 1.1;
+    margin: 1.25rem auto 2rem;
+    max-width: 22ch;
+  }
+  .colophon-mail {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 3vw, 2.25rem);
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 0.2rem;
+    margin-bottom: 2.5rem;
+    transition: opacity .2s;
+  }
+  .colophon-mail:hover { opacity: 0.7; }
+
+  .colophon-meta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    line-height: 2;
+    margin-top: 2.5rem;
+    border-top: 1px solid var(--rule-strong);
+    padding-top: 2rem;
+  }
+  .colophon-meta a { color: var(--ink); text-decoration: none; transition: color .2s; }
+  .colophon-meta a:hover { color: var(--accent); }
+  .colophon-meta-row + .colophon-meta-row { margin-top: 0.4rem; }
+
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity .9s ease, transform .9s ease; }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    html { scroll-behavior: auto; }
+    .case-embed-label .live-dot { animation: none; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header class="masthead">
+    <div class="masthead-row">
+      <span>Mosór &nbsp;·&nbsp; Issue 01 &nbsp;·&nbsp; MMXXVI</span>
+      <div class="masthead-nav-wrap">
+        <nav>
+          <a href="#about">Profile</a>
+          <a href="#work">Work</a>
+          <a href="#stack">Stack</a>
+          <a href="#career">Career</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle theme">Dark</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="kicker">Portfolio · Mateusz Mosór · 2026</div>
+    <h1 class="hero-headline">
+      I turn buildings<br>
+      into <em>data</em>, and data<br>
+      into <em>decisions.</em>
+    </h1>
+    <div class="hero-meta">
+      <div class="hero-meta-item">Discipline<strong>FM × Data Science</strong></div>
+      <div class="hero-meta-item">Based in<strong>Breda, Netherlands</strong></div>
+      <div class="hero-meta-item">Graduating<strong>June 2026</strong></div>
+      <div class="hero-meta-item">Available<strong>Summer 2026</strong></div>
+    </div>
+  </section>
+
+  <section class="contents">
+    <div class="label">— Index —</div>
+    <ol class="contents-list">
+      <li><span class="contents-num">01</span><a href="#about">Profile</a><span class="contents-page">p. 02</span></li>
+      <li><span class="contents-num">02</span><a href="#work">Selected Work</a><span class="contents-page">p. 06</span></li>
+      <li><span class="contents-num">03</span><a href="#stack">Stack &amp; Tooling</a><span class="contents-page">p. 14</span></li>
+      <li><span class="contents-num">04</span><a href="#career">Career Notes</a><span class="contents-page">p. 18</span></li>
+      <li><span class="contents-num">05</span><a href="#contact">Colophon &amp; Contact</a><span class="contents-page">p. 24</span></li>
+    </ol>
+  </section>
+
+  <section class="article" id="about">
+    <div class="article-num">01 — Profile</div>
+    <h2 class="article-headline">From the warehouse floor to the <em>model file.</em></h2>
+    <div class="article-body">
+      <aside class="article-aside">
+        <div class="article-aside-row">Author<strong>Mateusz Mosór</strong></div>
+        <div class="article-aside-row">Studying<strong>BSc International Facility Management, Data Science &amp; AI minor. Breda University of Applied Sciences. Finishing June 2026.</strong></div>
+        <div class="article-aside-row">Languages<strong>Polish · English (professional) · Dutch (elementary)</strong></div>
+        <div class="article-aside-row">Outside work<strong>Esports · Football · Travel</strong></div>
+      </aside>
+      <div class="prose">
+        <p>Six years on a warehouse floor before I touched a Jupyter notebook. Reach truck, front desk, then all-rounder coordinating teams of fifty to a hundred people at Jumbo Breda. You learn quickly that the spreadsheet and the warehouse floor disagree more often than either of them admits, and operations people figure this out in their first month.</p>
+        <p>I'm wrapping up a BSc in Facility Management at BUAS this June, with a Data Science minor. In early 2024 I spent six months at Avolta in Helsinki on a finance internship: passenger forecasting against actuals, weekly KPI decks, the kind of Excel automation nobody puts on LinkedIn but everyone needs.</p>
+        <div class="pull-quote">"The spreadsheet and the warehouse floor disagree more often than either of them admits."</div>
+        <p>What I'm after next: a graduate role where the data is messy and the stakeholder cares about the answer. Data, BI, or ops research. The title matters less than whether the work is real.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="work-header">
+      <div class="article-num">02 — Selected Work</div>
+      <h2><em>Three</em> projects, three <em>methods.</em></h2>
+    </div>
+
+    <article class="case">
+      <div class="case-meta">
+        <div class="case-num"><em>.01</em></div>
+        <div class="case-category">Machine Learning · Production</div>
+        <h3 class="case-headline">Intelligent <em>Occupancy</em> Detection</h3>
+        <p class="case-lede">Predicts real-time room occupancy from four sensors: temperature, humidity, CO₂, and light. The pipeline cleans the data, engineers features, and validates with a Champion vs. Challenger setup. It's deployed on Streamlit. Click around if you want to poke at it.</p>
+        <div class="case-metrics">
+          <div><div class="case-metric-label">Model</div><div class="case-metric-value">XGBoost</div></div>
+          <div><div class="case-metric-label">Inputs</div><div class="case-metric-value">4 sensors</div></div>
+          <div><div class="case-metric-label">Status</div><div class="case-metric-value">Live</div></div>
+        </div>
+        <div class="case-stack">
+          <span>Python</span><span>XGBoost</span><span>Streamlit</span><span>Plotly</span><span>Pandas</span>
+        </div>
+        <div class="case-actions">
+          <a href="https://office-occupancy-app.streamlit.app/" target="_blank" rel="noopener">Open live app</a>
+          <a href="https://github.com/Attenersi/occupancy-ml-streamlit" target="_blank" rel="noopener">Source code</a>
+        </div>
+      </div>
+      <figure>
+        <div class="case-image"><img src="./assets/occupancy.jpg" alt="Occupancy detection app interface" loading="lazy"></div>
+        <figcaption class="case-caption">Fig. 01 — Streamlit interface, screenshot.</figcaption>
+      </figure>
+    </article>
+
+    <div class="case-embed">
+      <div class="case-embed-label">
+        <span><span class="live-dot"></span>Live demo · Try it inside the page</span>
+        <a href="https://office-occupancy-app.streamlit.app/" target="_blank" rel="noopener">Open in new tab ↗</a>
+      </div>
+      <div class="case-iframe-wrap">
+        <iframe
+          src="https://office-occupancy-app.streamlit.app/?embed=true"
+          loading="lazy"
+          title="Live occupancy detection ML app"
+          allow="fullscreen">
+        </iframe>
+      </div>
+    </div>
+
+    <article class="case">
+      <div class="case-meta">
+        <div class="case-num"><em>.02</em></div>
+        <div class="case-category">Data Visualisation · Energy</div>
+        <h3 class="case-headline">Nuclear Energy <em>SDG</em> Dashboard</h3>
+        <p class="case-lede">A multi-page Power BI report on nuclear adoption and carbon intensity across European grids. The headline finding: a −0.40 correlation between nuclear share and grams of CO₂ per kWh. Not a causation claim, but a pattern that holds up across countries.</p>
+        <div class="case-metrics">
+          <div><div class="case-metric-label">Correlation</div><div class="case-metric-value">−0.40</div></div>
+          <div><div class="case-metric-label">Scope</div><div class="case-metric-value">Europe</div></div>
+          <div><div class="case-metric-label">Format</div><div class="case-metric-value">Multi-page</div></div>
+        </div>
+        <div class="case-stack">
+          <span>Power BI</span><span>DAX</span><span>Excel</span>
+        </div>
+        <div class="case-actions">
+          <a href="#contact">Request walkthrough</a>
+        </div>
+      </div>
+      <figure>
+        <div class="case-image"><img src="./assets/sdg.jpg" alt="Nuclear Energy SDG Power BI dashboard" loading="lazy"></div>
+        <figcaption class="case-caption">Fig. 02 — Power BI report, multi-page dashboard.</figcaption>
+      </figure>
+    </article>
+
+    <article class="case">
+      <div class="case-meta">
+        <div class="case-num"><em>.03</em></div>
+        <div class="case-category">Operations Research · Client Project</div>
+        <h3 class="case-headline">DKG Logistics <em>Optimisation</em></h3>
+        <p class="case-lede">Client project for DKG Keukens. The problem: how to load mixed cargo of heavy and fragile kitchen units into one truck without the bottom layer crushing the top. We tried ML first. It kept producing mathematically tidy answers that ignored physics. So we switched to a heuristic algorithm and built a 3D packing visualisation around it. Plus a safety framework, because warehouse staff need to trust the output before they'll use it.</p>
+        <div class="case-metrics">
+          <div><div class="case-metric-label">Approach</div><div class="case-metric-value">Heuristic</div></div>
+          <div><div class="case-metric-label">Output</div><div class="case-metric-value">3D viz</div></div>
+          <div><div class="case-metric-label">Client</div><div class="case-metric-value">DKG Keukens</div></div>
+        </div>
+        <div class="case-stack">
+          <span>Python</span><span>Heuristics</span><span>3D Visualisation</span>
+        </div>
+        <div class="case-actions">
+          <a href="#contact">Discuss in detail</a>
+        </div>
+      </div>
+      <figure>
+        <div class="case-image"><img src="./assets/optimization.jpg" alt="DKG truck loading 3D visualisation" loading="lazy"></div>
+        <figcaption class="case-caption">Fig. 03 — 3D packing visualisation, client deliverable.</figcaption>
+      </figure>
+    </article>
+  </section>
+
+  <section class="stack" id="stack">
+    <div class="article-num">03 — Stack &amp; Tooling</div>
+    <h2 class="article-headline">What I <em>reach for.</em></h2>
+    <div class="stack-grid">
+      <div class="stack-col">
+        <h4>Data &amp; ML</h4>
+        <ul><li>Python</li><li>XGBoost</li><li>Pandas</li><li>Streamlit</li><li>SQL</li></ul>
+      </div>
+      <div class="stack-col">
+        <h4>Business Intelligence</h4>
+        <ul><li>Power BI</li><li>DAX</li><li>Tableau</li><li>Plotly</li><li>Excel · PivotTables</li></ul>
+      </div>
+      <div class="stack-col">
+        <h4>Workflow &amp; Tooling</h4>
+        <ul><li>Alteryx</li><li>Git</li><li>WMS Operations</li><li>Six Sigma · Yellow Belt</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="career" id="career">
+    <div class="article-num">04 — Career Notes</div>
+    <h2 class="article-headline">Six years <em>operating</em>, two years <em>analysing.</em></h2>
+    <div class="career-list">
+      <div class="career-row">
+        <div class="career-when">Feb — Aug 2024</div>
+        <div class="career-what">
+          <h5>Finance Department Intern</h5>
+          <div class="career-where">Avolta · Helsinki, Finland</div>
+          <p class="career-detail">Built weekly financial and KPI reports. Compared forecast vs. actual passenger numbers and flagged scheduling adjustments. Automated Excel templates and wrote onboarding documentation.</p>
+        </div>
+      </div>
+      <div class="career-row">
+        <div class="career-when">2022 — Present</div>
+        <div class="career-what">
+          <h5>All-round Logistics Employee</h5>
+          <div class="career-where">Jumbo Supermarkten · Breda</div>
+          <p class="career-detail">Coordinated daily task allocation for teams of 50–100 people. Ran operational reporting, WMS data work, and shift documentation.</p>
+        </div>
+      </div>
+      <div class="career-row">
+        <div class="career-when">2020 — 2022</div>
+        <div class="career-what">
+          <h5>Front Desk · Baliemedewerker</h5>
+          <div class="career-where">Jumbo Supermarkten · Breda</div>
+          <p class="career-detail">Inventory oversight, shift reporting, WMS operations.</p>
+        </div>
+      </div>
+      <div class="career-row">
+        <div class="career-when">2019 — 2020</div>
+        <div class="career-what">
+          <h5>Reach Truck Operator</h5>
+          <div class="career-where">Jumbo Supermarkten · Breda</div>
+          <p class="career-detail">Distribution centre operations. Trained new operators on safety procedures.</p>
+        </div>
+      </div>
+      <div class="career-row">
+        <div class="career-when">2017</div>
+        <div class="career-what">
+          <h5>Logistics · Cross-border Restocking</h5>
+          <div class="career-where">KODANO S.A. · Kraków</div>
+          <p class="career-detail">Restocking with the Hungarian branch. Order picking, parcel preparation, international shipment.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="colophon" id="contact">
+    <div class="article-num" style="display:block;">05 — Colophon &amp; Contact</div>
+    <p class="colophon-headline">Got messy data and someone who needs the answer?</p>
+    <a class="colophon-mail" href="mailto:mosorm@gmail.com">mosorm@gmail.com</a>
+    <div class="colophon-meta">
+      <div class="colophon-meta-row">
+        <a href="https://github.com/Attenersi" target="_blank" rel="noopener">GitHub ↗</a>
+        &nbsp;·&nbsp;
+        <a href="#" target="_blank" rel="noopener">LinkedIn ↗</a>
+        &nbsp;·&nbsp;
+        <a href="./assets/resume.pdf" target="_blank" rel="noopener">Résumé ↗</a>
+      </div>
+      <div class="colophon-meta-row" style="margin-top: 1.5rem;">Set in Instrument Serif &amp; Geist &nbsp;·&nbsp; Composed in Breda &nbsp;·&nbsp; Issue 01, MMXXVI</div>
+      <div class="colophon-meta-row">© 2026 Mateusz Mosór. All rights reserved.</div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  const els = document.querySelectorAll('.hero, .contents, .article, .case, .case-embed, .stack, .career, .colophon');
+  els.forEach(e => e.classList.add('reveal'));
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }});
+  }, { threshold: 0.08 });
+  els.forEach(e => io.observe(e));
+  document.querySelector('.hero')?.classList.add('in');
+
+  const toggle = document.getElementById('themeToggle');
+  const setTheme = (mode) => {
+    if (mode === 'dark') {
+      document.body.classList.add('dark');
+      toggle.textContent = 'Light';
+    } else {
+      document.body.classList.remove('dark');
+      toggle.textContent = 'Dark';
+    }
+    try { localStorage.setItem('mosor-theme', mode); } catch (e) {}
+  };
+  let initial = 'light';
+  try {
+    const stored = localStorage.getItem('mosor-theme');
+    if (stored === 'dark' || stored === 'light') initial = stored;
+    else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) initial = 'dark';
+  } catch (e) {}
+  setTheme(initial);
+  toggle.addEventListener('click', () => {
+    setTheme(document.body.classList.contains('dark') ? 'light' : 'dark');
+  });
+</script>
+</body>
+</html>
