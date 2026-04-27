@@ -296,8 +296,26 @@
     color: var(--ink);
     padding: 1.5rem 0 1.5rem 1.75rem;
     margin: 2rem 0;
-    border-left: 2px solid var(--accent);
     max-width: 30ch;
+    position: relative;
+    opacity: 0.45;
+    transition: opacity 1.1s ease;
+  }
+  .pull-quote::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 2px;
+    height: 0;
+    background: var(--accent);
+    transition: height 1.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .pull-quote.in {
+    opacity: 1;
+  }
+  .pull-quote.in::before {
+    height: 100%;
   }
 
   .work-header { padding: clamp(4rem, 8vw, 7rem) 0 1rem; }
@@ -788,7 +806,41 @@
     pointer-events: none;
   }
 
-  /* Hero word stagger reveal */
+  /* === Case image tilt support === */
+  .case-image:not(.case-blueprint) {
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+
+  /* === Stagger reveal for stack and career === */
+  .stack-col,
+  .career-row {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .stack.in .stack-col,
+  .career.in .career-row {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .stack.in .stack-col:nth-child(1) { transition-delay: 0.05s; }
+  .stack.in .stack-col:nth-child(2) { transition-delay: 0.18s; }
+  .stack.in .stack-col:nth-child(3) { transition-delay: 0.31s; }
+  .career.in .career-row:nth-child(1) { transition-delay: 0.05s; }
+  .career.in .career-row:nth-child(2) { transition-delay: 0.14s; }
+  .career.in .career-row:nth-child(3) { transition-delay: 0.23s; }
+  .career.in .career-row:nth-child(4) { transition-delay: 0.32s; }
+  .career.in .career-row:nth-child(5) { transition-delay: 0.41s; }
+
+  /* === Reduced motion overrides for new effects === */
+  @media (prefers-reduced-motion: reduce) {
+    .pull-quote { opacity: 1; transition: none; }
+    .pull-quote::before { height: 100%; transition: none; }
+    .stack-col, .career-row { opacity: 1; transform: none; transition: none; }
+    .case-image:not(.case-blueprint) { transform: none !important; }
+  }
   .hero-headline .word {
     display: inline-block;
     opacity: 0;
@@ -896,7 +948,7 @@
         <h3 class="case-headline">Intelligent <em>Occupancy</em> Detection</h3>
         <p class="case-lede">Predicts real-time room occupancy from four sensors: temperature, humidity, CO₂, and light. The pipeline cleans the data, engineers features, and validates with a Champion vs. Challenger setup. It's deployed on Streamlit. Click around if you want to poke at it.</p>
         <div class="case-metrics">
-          <div><div class="case-metric-label">Accuracy</div><div class="case-metric-value">≈85%</div></div>
+          <div><div class="case-metric-label">Accuracy</div><div class="case-metric-value" data-count="85" data-prefix="≈" data-suffix="%">≈85%</div></div>
           <div><div class="case-metric-label">Inputs</div><div class="case-metric-value">4 sensors</div></div>
           <div><div class="case-metric-label">Status</div><div class="case-metric-value">Live</div></div>
         </div>
@@ -936,7 +988,7 @@
         <h3 class="case-headline">Nuclear Energy <em>SDG</em> Dashboard</h3>
         <p class="case-lede">A multi-page Power BI report on nuclear adoption and carbon intensity across European grids. The headline finding: a −0.40 correlation between nuclear share and grams of CO₂ per kWh. Not a causation claim, but a pattern that holds up across countries.</p>
         <div class="case-metrics">
-          <div><div class="case-metric-label">Correlation</div><div class="case-metric-value">−0.40</div></div>
+          <div><div class="case-metric-label">Correlation</div><div class="case-metric-value" data-count="-0.40" data-decimals="2">−0.40</div></div>
           <div><div class="case-metric-label">Scope</div><div class="case-metric-value">Europe</div></div>
           <div><div class="case-metric-label">Format</div><div class="case-metric-value">Multi-page</div></div>
         </div>
@@ -996,7 +1048,7 @@
         <p class="case-lede">An LLM-backed assistant for facility-management teams. Atrio connects to Llama 3.1 through NVIDIA's API, retrieves context with RAG over building documentation and historic tickets, and auto-creates new tickets when an issue is identified mid-conversation. The point isn't a smarter chatbot — it's a faster path from "tenant reports a problem" to "work order in the system."</p>
         <div class="case-status">In progress · 2026</div>
         <div class="case-stack">
-          <span>Llama 3.1</span><span>NVIDIA API</span><span>RAG</span><span>Python</span><span>Vector search</span>
+          <span>Llama 3.1</span><span>NVIDIA API</span><span>RAG</span><span>React</span><span>Python</span><span>Vector search</span>
         </div>
         <div class="case-actions">
           <a href="#contact">Discuss the build</a>
@@ -1226,6 +1278,86 @@
         });
       }
     }, { passive: true });
+  })();
+
+  // === Pull-quote ink-draw reveal ===
+  (function pullQuoteReveal() {
+    const quotes = document.querySelectorAll('.pull-quote');
+    if (!quotes.length) return;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(en => {
+        if (en.isIntersecting) {
+          en.target.classList.add('in');
+          io.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.55 });
+    quotes.forEach(q => io.observe(q));
+  })();
+
+  // === Counter animation for case metrics ===
+  (function counterAnimation() {
+    const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+    const animate = (el) => {
+      if (el.dataset.counted) return;
+      el.dataset.counted = '1';
+      const target = parseFloat(el.dataset.count);
+      const decimals = parseInt(el.dataset.decimals || '0', 10);
+      const prefix = el.dataset.prefix || '';
+      const suffix = el.dataset.suffix || '';
+      const duration = 1300;
+      const start = performance.now();
+      const isNeg = target < 0;
+      const absTarget = Math.abs(target);
+      const step = (now) => {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = easeOutCubic(progress);
+        const current = absTarget * eased;
+        const formatted = current.toFixed(decimals);
+        el.textContent = prefix + (isNeg ? '−' : '') + formatted + suffix;
+        if (progress < 1) requestAnimationFrame(step);
+        else el.textContent = prefix + (isNeg ? '−' : '') + absTarget.toFixed(decimals) + suffix;
+      };
+      requestAnimationFrame(step);
+    };
+    const counters = document.querySelectorAll('[data-count]');
+    if (!counters.length) return;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(en => {
+        if (en.isIntersecting) {
+          animate(en.target);
+          io.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.4 });
+    counters.forEach(c => io.observe(c));
+  })();
+
+  // === Cursor tilt on case images ===
+  (function cursorTilt() {
+    if (window.matchMedia('(hover: none)').matches) return;
+    const tiltMax = 2.5;
+    document.querySelectorAll('.case-image:not(.case-blueprint)').forEach(el => {
+      let raf = null;
+      el.addEventListener('mousemove', (e) => {
+        const rect = el.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        const rotateY = x * (tiltMax * 2);
+        const rotateX = -y * (tiltMax * 2);
+        if (raf) cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(() => {
+          el.style.transform = `perspective(1100px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+      });
+      el.addEventListener('mouseleave', () => {
+        if (raf) cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(() => {
+          el.style.transform = '';
+        });
+      });
+    });
   })();
 
   // === Lightbox / gallery ===
