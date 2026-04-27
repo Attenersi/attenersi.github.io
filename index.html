@@ -419,6 +419,58 @@
   }
   .case-image.img-in img { --img-blur: 0px; }
   .case-image.img-in:hover img { filter: saturate(1) contrast(1) blur(0); transform: scale(1.02); }
+
+  /* Blueprint: in-progress case visual without image */
+  .case-blueprint {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image:
+      linear-gradient(var(--rule) 1px, transparent 1px),
+      linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+    background-size: 24px 24px;
+    background-position: -1px -1px;
+  }
+  .case-blueprint pre {
+    font-family: var(--font-mono);
+    font-size: clamp(9px, 1.05vw, 12px);
+    line-height: 1.9;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    margin: 0;
+    text-transform: uppercase;
+    white-space: pre;
+  }
+  .case-blueprint .bp-head {
+    color: var(--accent);
+    display: block;
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.18em;
+    font-weight: 500;
+  }
+  .case-blueprint .bp-step { color: var(--ink); }
+  .case-blueprint .bp-arrow { color: var(--muted); }
+  .case-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding: 0.35rem 0.7rem;
+    border: 1px solid var(--accent);
+    margin-bottom: 1.5rem;
+  }
+  .case-status::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 1.8s ease-in-out infinite;
+  }
   .case-caption {
     font-family: var(--font-mono);
     font-size: 10.5px;
@@ -709,12 +761,13 @@
       <aside class="article-aside">
         <div class="article-aside-row">Author<strong>Mateusz Mosór</strong></div>
         <div class="article-aside-row">Studying<strong>BSc International Facility Management, Data Science &amp; AI minor. Breda University of Applied Sciences. Finishing June 2026.</strong></div>
+        <div class="article-aside-row">Currently building<strong>FM Operations Co-pilot — Llama 3.1 + RAG. See <a href="#work" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);">.04</a>.</strong></div>
         <div class="article-aside-row">Languages<strong>Polish · English (professional) · Dutch (elementary)</strong></div>
         <div class="article-aside-row">Outside work<strong>Esports · Football · Travel</strong></div>
       </aside>
       <div class="prose">
         <p>Six years on a warehouse floor before I touched a Jupyter notebook. Reach truck, front desk, then all-rounder coordinating teams of fifty to a hundred people at Jumbo Breda. You learn quickly that the spreadsheet and the warehouse floor disagree more often than either of them admits, and operations people figure this out in their first month.</p>
-        <p>I'm wrapping up a BSc in Facility Management at BUAS this June, with a Data Science minor. In early 2024 I spent six months at Avolta in Helsinki on a finance internship: passenger forecasting against actuals, weekly KPI decks, the kind of Excel automation nobody puts on LinkedIn but everyone needs.</p>
+        <p>I'm wrapping up a BSc in Facility Management at BUAS this June, with a Data Science minor. In early 2024 I spent six months at Avolta in Helsinki on a finance internship: building passenger flow forecasts against actuals, weekly KPI reporting, and the kind of process automation that scheduling decisions actually depend on.</p>
         <div class="pull-quote">"The spreadsheet and the warehouse floor disagree more often than either of them admits."</div>
         <p>What I'm after next: a graduate role where the data is messy and the stakeholder cares about the answer. Data, BI, or ops research. The title matters less than whether the work is real.</p>
       </div>
@@ -724,7 +777,7 @@
   <section id="work">
     <div class="work-header">
       <div class="article-num">02 — Selected Work</div>
-      <h2><em>Three</em> projects, three <em>methods.</em></h2>
+      <h2><em>Three</em> shipped, <em>one</em> in progress.</h2>
     </div>
 
     <article class="case">
@@ -734,7 +787,7 @@
         <h3 class="case-headline">Intelligent <em>Occupancy</em> Detection</h3>
         <p class="case-lede">Predicts real-time room occupancy from four sensors: temperature, humidity, CO₂, and light. The pipeline cleans the data, engineers features, and validates with a Champion vs. Challenger setup. It's deployed on Streamlit. Click around if you want to poke at it.</p>
         <div class="case-metrics">
-          <div><div class="case-metric-label">Model</div><div class="case-metric-value">XGBoost</div></div>
+          <div><div class="case-metric-label">Accuracy</div><div class="case-metric-value">≈85%</div></div>
           <div><div class="case-metric-label">Inputs</div><div class="case-metric-value">4 sensors</div></div>
           <div><div class="case-metric-label">Status</div><div class="case-metric-value">Live</div></div>
         </div>
@@ -796,10 +849,10 @@
         <div class="case-num"><em>.03</em></div>
         <div class="case-category">Operations Research · Client Project</div>
         <h3 class="case-headline">DKG Logistics <em>Optimisation</em></h3>
-        <p class="case-lede">Client project for DKG Keukens. The problem: how to load mixed cargo of heavy and fragile kitchen units into one truck without the bottom layer crushing the top. We tried ML first. It kept producing mathematically tidy answers that ignored physics. So we switched to a heuristic algorithm and built a 3D packing visualisation around it. Plus a safety framework, because warehouse staff need to trust the output before they'll use it.</p>
+        <p class="case-lede">Client project for DKG Keukens. The problem: how to load mixed cargo of heavy and fragile kitchen units into one truck without the bottom layer crushing the top. We tried ML first; it kept producing mathematically tidy answers that ignored physics. So we switched to a heuristic algorithm and built a 3D packing visualisation around it. The deliverable was twofold — a working prototype, and a clear map of approaches that don't solve the constraints. Both useful when the next team picks it up.</p>
         <div class="case-metrics">
           <div><div class="case-metric-label">Approach</div><div class="case-metric-value">Heuristic</div></div>
-          <div><div class="case-metric-label">Output</div><div class="case-metric-value">3D viz</div></div>
+          <div><div class="case-metric-label">Output</div><div class="case-metric-value">Prototype + R&amp;D map</div></div>
           <div><div class="case-metric-label">Client</div><div class="case-metric-value">DKG Keukens</div></div>
         </div>
         <div class="case-stack">
@@ -814,6 +867,32 @@
         <figcaption class="case-caption">Fig. 03 — 3D packing visualisation, client deliverable.</figcaption>
       </figure>
     </article>
+
+    <article class="case">
+      <div class="case-meta">
+        <div class="case-num"><em>.04</em></div>
+        <div class="case-category">LLM &amp; RAG · In Development</div>
+        <h3 class="case-headline">FM Operations <em>Co-pilot</em></h3>
+        <p class="case-lede">An LLM-backed assistant for facility-management teams. Connects to Llama 3.1 through NVIDIA's API, retrieves context with RAG over building documentation and historic tickets, and auto-creates new tickets when an issue is identified mid-conversation. The point isn't a smarter chatbot — it's a faster path from "tenant reports a problem" to "work order in the system."</p>
+        <div class="case-status">In progress · 2026</div>
+        <div class="case-stack">
+          <span>Llama 3.1</span><span>NVIDIA API</span><span>RAG</span><span>Python</span><span>Vector search</span>
+        </div>
+        <div class="case-actions">
+          <a href="#contact">Discuss the build</a>
+        </div>
+      </div>
+      <figure>
+        <div class="case-image case-blueprint"><pre><span class="bp-head">// architecture · draft</span><span class="bp-step">knowledge base   </span>fm docs · tickets · sops
+       <span class="bp-arrow">↓</span>
+<span class="bp-step">retrieval        </span>vector search · top-k
+       <span class="bp-arrow">↓</span>
+<span class="bp-step">reasoning        </span>llama 3.1 · nvidia api
+       <span class="bp-arrow">↓</span>
+<span class="bp-step">action layer     </span>auto-ticket · escalate</pre></div>
+        <figcaption class="case-caption">Fig. 04 — System architecture, in development.</figcaption>
+      </figure>
+    </article>
   </section>
 
   <section class="stack" id="stack">
@@ -822,15 +901,15 @@
     <div class="stack-grid">
       <div class="stack-col">
         <h4>Data &amp; ML</h4>
-        <ul><li>Python</li><li>XGBoost</li><li>Pandas</li><li>Streamlit</li><li>SQL</li></ul>
+        <ul><li>Python</li><li>XGBoost</li><li>Pandas</li><li>SQL</li><li>Streamlit</li></ul>
       </div>
       <div class="stack-col">
-        <h4>Business Intelligence</h4>
-        <ul><li>Power BI</li><li>DAX</li><li>Tableau</li><li>Plotly</li><li>Excel · PivotTables</li></ul>
+        <h4>BI &amp; ETL</h4>
+        <ul><li>Power BI</li><li>DAX</li><li>Tableau</li><li>Alteryx</li><li>Plotly</li></ul>
       </div>
       <div class="stack-col">
-        <h4>Workflow &amp; Tooling</h4>
-        <ul><li>Alteryx</li><li>Git</li><li>WMS Operations</li><li>Six Sigma · Yellow Belt</li></ul>
+        <h4>Practice</h4>
+        <ul><li>Champion vs. Challenger</li><li>Feature engineering</li><li>Heuristic optimisation</li><li>Production deployment</li></ul>
       </div>
     </div>
   </section>
@@ -844,7 +923,7 @@
         <div class="career-what">
           <h5>Finance Department Intern</h5>
           <div class="career-where">Avolta · Helsinki, Finland</div>
-          <p class="career-detail">Built weekly financial and KPI reports. Compared forecast vs. actual passenger numbers and flagged scheduling adjustments. Automated Excel templates and wrote onboarding documentation.</p>
+          <p class="career-detail">Built weekly financial and KPI reports. Compared forecast vs. actual passenger numbers and flagged scheduling adjustments. Built process automations still in use across Sweden and Finland departments, saving several hours per week.</p>
         </div>
       </div>
       <div class="career-row">
@@ -852,7 +931,7 @@
         <div class="career-what">
           <h5>All-round Logistics Employee</h5>
           <div class="career-where">Jumbo Supermarkten · Breda</div>
-          <p class="career-detail">Coordinated daily task allocation for teams of 50–100 people. Ran operational reporting, WMS data work, and shift documentation.</p>
+          <p class="career-detail">Operations support across shifts of 50–100 people. Kept the warehouse floor running, supported colleagues on operational issues, and prepared planning for upcoming shifts — assistant team-leader role in everything but title.</p>
         </div>
       </div>
       <div class="career-row">
