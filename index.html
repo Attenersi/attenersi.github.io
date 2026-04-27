@@ -75,18 +75,16 @@
     top: 0;
     background: var(--bg);
     z-index: 50;
-    border-top: 6px double var(--rule-strong);
     border-bottom: 1px solid var(--rule-strong);
-    padding: 0.85rem 0;
+    padding: 1.05rem 0 0.85rem;
     font-family: var(--font-mono);
     font-size: 11px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    transition: padding 0.35s ease, border-top-width 0.35s ease;
+    transition: padding 0.35s ease;
   }
   .masthead.compact {
-    padding: 0.45rem 0;
-    border-top-width: 3px;
+    padding: 0.55rem 0 0.45rem;
   }
   .masthead-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
   .masthead-nav-wrap { display: flex; align-items: center; gap: 1.75rem; }
@@ -793,17 +791,23 @@
   .reveal { opacity: 0; transform: translateY(20px); transition: opacity .9s ease, transform .9s ease; }
   .reveal.in { opacity: 1; transform: translateY(0); }
 
-  /* Progress bar */
+  /* Progress bar — replaces masthead top border, acts as both static frame and scroll indicator */
   .progress-bar {
     position: fixed;
     top: 0;
     left: 0;
-    width: 0%;
+    right: 0;
     height: 2px;
-    background: var(--accent);
+    background: rgba(20, 18, 16, 0.4);
     z-index: 100;
-    transition: width 0.08s linear;
     pointer-events: none;
+  }
+  body.dark .progress-bar { background: rgba(232, 221, 200, 0.3); }
+  .progress-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--accent);
+    transition: width 0.08s linear;
   }
 
   /* === Case image tilt support === */
@@ -863,7 +867,7 @@
 </style>
 </head>
 <body>
-<div class="progress-bar" aria-hidden="true"></div>
+<div class="progress-bar" aria-hidden="true"><div class="progress-bar-fill"></div></div>
 <div class="lightbox" role="dialog" aria-hidden="true" aria-label="Image viewer">
   <button class="lightbox-btn lb-close" type="button" aria-label="Close">×</button>
   <button class="lightbox-btn lb-prev" type="button" aria-label="Previous image">‹</button>
@@ -1190,7 +1194,7 @@
   sections.forEach(s => spyIo.observe(s));
 
   // === Progress bar + compact masthead ===
-  const bar = document.querySelector('.progress-bar');
+  const bar = document.querySelector('.progress-bar-fill');
   const masthead = document.querySelector('.masthead');
   let ticking = false;
   function onScroll() {
