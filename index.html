@@ -471,6 +471,108 @@
     background: var(--accent);
     animation: pulse 1.8s ease-in-out infinite;
   }
+
+  /* === Gallery thumbs === */
+  .case-thumbs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+    gap: 0.4rem;
+    margin-top: 0.5rem;
+  }
+  .case-thumb {
+    background: var(--bg-alt);
+    border: 1px solid var(--rule-strong);
+    padding: 0.4rem;
+    cursor: zoom-in;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    transition: border-color 0.25s ease, transform 0.25s ease;
+    appearance: none;
+  }
+  .case-thumb:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .case-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: saturate(0.85) contrast(1.02);
+  }
+  .case-image { cursor: zoom-in; }
+
+  /* === Lightbox === */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(20, 18, 16, 0.94);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  .lightbox.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .lightbox img {
+    max-width: 92vw;
+    max-height: 86vh;
+    object-fit: contain;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+    background: #FFF;
+  }
+  .lightbox-btn {
+    position: absolute;
+    background: transparent;
+    border: 1px solid rgba(232, 221, 200, 0.4);
+    color: #E8DDC8;
+    font-family: var(--font-display);
+    cursor: pointer;
+    z-index: 201;
+    transition: background-color 0.2s, border-color 0.2s;
+  }
+  .lightbox-btn:hover {
+    background: rgba(232, 221, 200, 0.1);
+    border-color: rgba(232, 221, 200, 0.8);
+  }
+  .lb-close {
+    top: 24px;
+    right: 24px;
+    width: 44px;
+    height: 44px;
+    font-size: 28px;
+    line-height: 1;
+  }
+  .lb-prev, .lb-next {
+    top: 50%;
+    transform: translateY(-50%);
+    width: 56px;
+    height: 56px;
+    font-size: 32px;
+    font-style: italic;
+    line-height: 1;
+  }
+  .lb-prev { left: 24px; }
+  .lb-next { right: 24px; }
+  .lb-counter {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(232, 221, 200, 0.8);
+    z-index: 201;
+  }
+  @media (max-width: 600px) {
+    .lb-prev, .lb-next { width: 44px; height: 44px; font-size: 22px; }
+    .lb-prev { left: 12px; }
+    .lb-next { right: 12px; }
+    .lb-close { top: 12px; right: 12px; }
+  }
   .case-caption {
     font-family: var(--font-mono);
     font-size: 10.5px;
@@ -710,6 +812,13 @@
 </head>
 <body>
 <div class="progress-bar" aria-hidden="true"></div>
+<div class="lightbox" role="dialog" aria-hidden="true" aria-label="Image viewer">
+  <button class="lightbox-btn lb-close" type="button" aria-label="Close">×</button>
+  <button class="lightbox-btn lb-prev" type="button" aria-label="Previous image">‹</button>
+  <button class="lightbox-btn lb-next" type="button" aria-label="Next image">›</button>
+  <img alt="">
+  <div class="lb-counter"></div>
+</div>
 <div class="container">
 
   <header class="masthead">
@@ -761,7 +870,7 @@
       <aside class="article-aside">
         <div class="article-aside-row">Author<strong>Mateusz Mosór</strong></div>
         <div class="article-aside-row">Studying<strong>BSc International Facility Management, Data Science &amp; AI minor. Breda University of Applied Sciences. Finishing June 2026.</strong></div>
-        <div class="article-aside-row">Currently building<strong>FM Operations Co-pilot — Llama 3.1 + RAG. See <a href="#work" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);">.04</a>.</strong></div>
+        <div class="article-aside-row">Currently building<strong>Atrio — an FM co-pilot. Llama 3.1 + RAG. See <a href="#work" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);">.04</a>.</strong></div>
         <div class="article-aside-row">Languages<strong>Polish · English (professional) · Dutch (elementary)</strong></div>
         <div class="article-aside-row">Outside work<strong>Esports · Football · Travel</strong></div>
       </aside>
@@ -838,9 +947,15 @@
           <a href="#contact">Request walkthrough</a>
         </div>
       </div>
-      <figure>
-        <div class="case-image"><img src="./assets/sdg.jpg" alt="Nuclear Energy SDG Power BI dashboard" loading="lazy"></div>
-        <figcaption class="case-caption">Fig. 02 — Power BI report, multi-page dashboard.</figcaption>
+      <figure data-gallery>
+        <div class="case-image"><img src="./assets/sdg.jpg" alt="Nuclear Energy SDG Power BI dashboard — overview" loading="lazy"></div>
+        <div class="case-thumbs">
+          <button class="case-thumb" type="button" aria-label="Open image"><img src="./assets/sdg_2.png" alt="SDG dashboard — page 2" loading="lazy"></button>
+          <button class="case-thumb" type="button" aria-label="Open image"><img src="./assets/sdg_3.png" alt="SDG dashboard — page 3" loading="lazy"></button>
+          <button class="case-thumb" type="button" aria-label="Open image"><img src="./assets/sdg_4.png" alt="SDG dashboard — page 4" loading="lazy"></button>
+          <button class="case-thumb" type="button" aria-label="Open image"><img src="./assets/sdg_5.png" alt="SDG dashboard — page 5" loading="lazy"></button>
+        </div>
+        <figcaption class="case-caption">Fig. 02 — Power BI report, five pages. Click to enlarge.</figcaption>
       </figure>
     </article>
 
@@ -862,9 +977,14 @@
           <a href="#contact">Discuss in detail</a>
         </div>
       </div>
-      <figure>
-        <div class="case-image"><img src="./assets/optimization.jpg" alt="DKG truck loading 3D visualisation" loading="lazy"></div>
-        <figcaption class="case-caption">Fig. 03 — 3D packing visualisation, client deliverable.</figcaption>
+      <figure data-gallery>
+        <div class="case-image"><img src="./assets/optimization.jpg" alt="DKG truck loading — main 3D visualisation" loading="lazy"></div>
+        <div class="case-thumbs">
+          <button class="case-thumb" type="button" aria-label="Open image"><img src="./assets/optimization_2.png" alt="DKG packing — view 2" loading="lazy"></button>
+          <button class="case-thumb" type="button" aria-label="Open image"><img src="./assets/optimization_3.png" alt="DKG packing — view 3" loading="lazy"></button>
+          <button class="case-thumb" type="button" aria-label="Open image"><img src="./assets/optimization_4.png" alt="DKG packing — view 4" loading="lazy"></button>
+        </div>
+        <figcaption class="case-caption">Fig. 03 — 3D packing prototype, four views. Click to enlarge.</figcaption>
       </figure>
     </article>
 
@@ -872,8 +992,8 @@
       <div class="case-meta">
         <div class="case-num"><em>.04</em></div>
         <div class="case-category">LLM &amp; RAG · In Development</div>
-        <h3 class="case-headline">FM Operations <em>Co-pilot</em></h3>
-        <p class="case-lede">An LLM-backed assistant for facility-management teams. Connects to Llama 3.1 through NVIDIA's API, retrieves context with RAG over building documentation and historic tickets, and auto-creates new tickets when an issue is identified mid-conversation. The point isn't a smarter chatbot — it's a faster path from "tenant reports a problem" to "work order in the system."</p>
+        <h3 class="case-headline"><em>Atrio</em></h3>
+        <p class="case-lede">An LLM-backed assistant for facility-management teams. Atrio connects to Llama 3.1 through NVIDIA's API, retrieves context with RAG over building documentation and historic tickets, and auto-creates new tickets when an issue is identified mid-conversation. The point isn't a smarter chatbot — it's a faster path from "tenant reports a problem" to "work order in the system."</p>
         <div class="case-status">In progress · 2026</div>
         <div class="case-stack">
           <span>Llama 3.1</span><span>NVIDIA API</span><span>RAG</span><span>Python</span><span>Vector search</span>
@@ -1106,6 +1226,84 @@
         });
       }
     }, { passive: true });
+  })();
+
+  // === Lightbox / gallery ===
+  (function lightbox() {
+    const lb = document.querySelector('.lightbox');
+    if (!lb) return;
+    const lbImg = lb.querySelector('img');
+    const lbCounter = lb.querySelector('.lb-counter');
+    const lbClose = lb.querySelector('.lb-close');
+    const lbPrev = lb.querySelector('.lb-prev');
+    const lbNext = lb.querySelector('.lb-next');
+
+    let gallery = [];
+    let index = 0;
+
+    function render() {
+      if (!gallery.length) return;
+      const item = gallery[index];
+      lbImg.src = item.src;
+      lbImg.alt = item.alt;
+      const single = gallery.length === 1;
+      lbPrev.style.display = single ? 'none' : '';
+      lbNext.style.display = single ? 'none' : '';
+      lbCounter.textContent = single ? '' : (index + 1) + ' / ' + gallery.length;
+    }
+    function open(g, i) {
+      gallery = g;
+      index = i;
+      render();
+      lb.classList.add('open');
+      lb.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function close() {
+      lb.classList.remove('open');
+      lb.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      setTimeout(() => { lbImg.src = ''; }, 300);
+    }
+    function step(delta) {
+      if (!gallery.length) return;
+      index = (index + delta + gallery.length) % gallery.length;
+      render();
+    }
+
+    lbClose.addEventListener('click', close);
+    lbPrev.addEventListener('click', (e) => { e.stopPropagation(); step(-1); });
+    lbNext.addEventListener('click', (e) => { e.stopPropagation(); step(1); });
+    lb.addEventListener('click', (e) => { if (e.target === lb) close(); });
+    document.addEventListener('keydown', (e) => {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') close();
+      else if (e.key === 'ArrowLeft') step(-1);
+      else if (e.key === 'ArrowRight') step(1);
+    });
+
+    // Bind every figure[data-gallery] + standalone .case-image
+    document.querySelectorAll('figure[data-gallery]').forEach(fig => {
+      const imgs = Array.from(fig.querySelectorAll('img'));
+      const items = imgs.map(i => ({ src: i.src, alt: i.alt }));
+      imgs.forEach((img, i) => {
+        const target = img.closest('button') || img.closest('.case-image') || img;
+        target.addEventListener('click', (e) => {
+          e.preventDefault();
+          open(items, i);
+        });
+        target.style.cursor = 'zoom-in';
+      });
+    });
+    // Single-image cases (Occupancy and any others without data-gallery)
+    document.querySelectorAll('figure:not([data-gallery]) .case-image:not(.case-blueprint)').forEach(box => {
+      const img = box.querySelector('img');
+      if (!img) return;
+      box.addEventListener('click', () => {
+        open([{ src: img.src, alt: img.alt }], 0);
+      });
+      box.style.cursor = 'zoom-in';
+    });
   })();
 
   // === Theme toggle ===
