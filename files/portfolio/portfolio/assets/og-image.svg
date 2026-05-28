@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#F2EDE3"/>
+
+  <!-- Subtle border frame -->
+  <rect x="40" y="40" width="1120" height="550" fill="none" stroke="#141210" stroke-opacity="0.85" stroke-width="2"/>
+
+  <!-- Top masthead bar -->
+  <line x1="40" y1="100" x2="1160" y2="100" stroke="#141210" stroke-opacity="0.85" stroke-width="1"/>
+
+  <!-- Masthead text -->
+  <g font-family="Georgia, 'Times New Roman', serif" fill="#141210">
+    <text x="80" y="80" font-size="14" letter-spacing="2.5" font-family="'Courier New', monospace">MOSÓR · ISSUE 01 · MMXXVI</text>
+    <text x="1120" y="80" font-size="14" letter-spacing="2.5" font-family="'Courier New', monospace" text-anchor="end">PORTFOLIO</text>
+  </g>
+
+  <!-- Big headline -->
+  <g font-family="Georgia, 'Times New Roman', serif" fill="#141210">
+    <text x="80" y="280" font-size="100" font-weight="400" letter-spacing="-3">I turn buildings</text>
+    <text x="80" y="380" font-size="100" font-weight="400" letter-spacing="-3">into <tspan font-style="italic" fill="#A53A1B">data</tspan>, and data</text>
+    <text x="80" y="480" font-size="100" font-weight="400" letter-spacing="-3">into <tspan font-style="italic" fill="#A53A1B">decisions.</tspan></text>
+  </g>
+
+  <!-- Bottom meta row -->
+  <line x1="40" y1="540" x2="1160" y2="540" stroke="#141210" stroke-opacity="0.85" stroke-width="1"/>
+  <g font-family="'Courier New', monospace" fill="#141210" font-size="13" letter-spacing="2">
+    <text x="80" y="575">MATEUSZ MOSÓR · FM × DATA SCIENCE</text>
+    <text x="1120" y="575" text-anchor="end" fill="#A53A1B">AVAILABLE SUMMER 2026</text>
+  </g>
+</svg>
