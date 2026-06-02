@@ -1212,12 +1212,71 @@ body.dark .progress-bar { background: rgba(232, 221, 200, 0.3); }
   letter-spacing: 0.1em;
   color: var(--muted);
 }
+.case-figure-media {
+  background: var(--bg-alt);
+  border: 1px solid var(--rule-strong);
+  overflow: hidden;
+  line-height: 0;
+}
 .case-figure img {
   width: 100%;
   height: auto;
   display: block;
-  border: 1px solid var(--rule-strong);
-  background: var(--bg-alt);
+  border: none;
+  background: transparent;
+}
+/* Panoramic UI (e.g. Streamlit dashboard) — cap height so controls stay legible */
+.case-figure--wide .case-figure-media {
+  max-height: clamp(15rem, 52vw, 30rem);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+.case-figure--wide .case-figure-media img {
+  max-height: clamp(15rem, 52vw, 30rem);
+  width: auto;
+  max-width: 100%;
+  margin-inline: auto;
+  object-fit: contain;
+  object-position: center top;
+}
+/* Tall documents (checklist, sticker sheet) */
+.case-figure--portrait-lg .case-figure-media {
+  max-width: min(100%, 42rem);
+  margin-inline: auto;
+}
+.case-figure--portrait .case-figure-media {
+  max-width: min(100%, 26rem);
+  margin-inline: auto;
+}
+/* Landscape app panel (validation / kill-switch) */
+.case-figure--ui .case-figure-media {
+  max-width: min(100%, 50rem);
+  margin-inline: auto;
+  max-height: clamp(14rem, 48vw, 28rem);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+.case-figure--ui .case-figure-media img {
+  max-height: clamp(14rem, 48vw, 28rem);
+  width: auto;
+  max-width: 100%;
+  margin-inline: auto;
+  object-fit: contain;
+  object-position: center top;
+}
+/* Stacked pair for mismatched portrait screenshots */
+.case-figure-grid--paper {
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
+  margin: 2.5rem 0;
+  align-items: center;
+}
+.case-figure-grid--paper .case-figure {
+  margin: 0;
+  width: 100%;
 }
 .case-figure figcaption {
   font-family: var(--font-mono);
@@ -1226,6 +1285,13 @@ body.dark .progress-bar { background: rgba(232, 221, 200, 0.3); }
   text-transform: uppercase;
   color: var(--muted);
   margin-top: 0.7rem;
+  text-align: center;
+  max-width: 42rem;
+  margin-inline: auto;
+}
+.case-figure--wide figcaption,
+.case-figure--ui figcaption {
+  max-width: none;
 }
 
 /* "What I owned" — checklist-style attribution box */
