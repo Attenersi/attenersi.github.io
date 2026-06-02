@@ -308,9 +308,15 @@
     else if (e.key === 'ArrowRight') step(1);
   });
 
-  // Bind every figure[data-gallery] images
+  // Bind galleries by shared figure[data-gallery] value.
+  // This allows one multi-image gallery across separate figures.
+  const grouped = {};
   document.querySelectorAll('figure[data-gallery]').forEach(fig => {
-    const imgs = Array.from(fig.querySelectorAll('img'));
+    const key = fig.getAttribute('data-gallery') || '__default';
+    if (!grouped[key]) grouped[key] = [];
+    Array.from(fig.querySelectorAll('img')).forEach(img => grouped[key].push(img));
+  });
+  Object.values(grouped).forEach(imgs => {
     const items = imgs.map(i => ({ src: i.src, alt: i.alt }));
     imgs.forEach((img, i) => {
       const target = img.closest('button') || img.closest('.case-image') || img;

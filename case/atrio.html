@@ -120,7 +120,7 @@
           </ul>
         </div>
 
-        <figure class="case-figure">
+        <figure class="case-figure" data-gallery="atrio-case">
           <img
             src="../assets/atrio/chat-rag.png"
             alt="Atrio chat interface with grounded response and created ticket"
@@ -171,7 +171,7 @@
 
         <p class="no-dropcap">This is also where most of the iteration time goes. Retrieval quality is a slow drift you measure once a week. Decision quality is what changes the moment you add a new category, a new building, or a new edge case.</p>
 
-        <figure class="case-figure">
+        <figure class="case-figure" data-gallery="atrio-case">
           <img
             src="../assets/atrio/multi-ticket.png"
             alt="Atrio chat where one message creates multiple maintenance tickets"
@@ -179,7 +179,7 @@
           <figcaption>Fig. 02 — One message, two tickets. Multi-issue parsing in the dashboard.</figcaption>
         </figure>
 
-        <figure class="case-figure">
+        <figure class="case-figure" data-gallery="atrio-case">
           <img
             src="../assets/atrio/dashboard.png"
             alt="Atrio operations dashboard with categories, priorities, and ticket list"
@@ -205,7 +205,7 @@
 
         <p class="no-dropcap">An eval suite keeps this layer honest. There's a file of hand-curated cases — the messages I want to behave a specific way — and a runner that scores the system against them. I watch two numbers: one for whether the system responded at all, and one for whether it responded <em>correctly</em> once transport failures are stripped out. The first tells me it's up. The second tells me it's right. The loop is simple and the whole point: difficult conversations get reviewed, the ones that exposed a weakness become new test cases, a rule or prompt gets edited, the suite re-runs. If the correctness number goes up, the change is the new baseline. If it doesn't, the change was wrong and I revert it. The eval isn't the product — it's the thing that stops me from lying to myself about whether the decision layer got better.</p>
 
-        <figure class="case-figure">
+        <figure class="case-figure" data-gallery="atrio-case">
           <img
             src="../assets/atrio/admin-eval.png"
             alt="Atrio admin and operations view used to tune decision behavior"
