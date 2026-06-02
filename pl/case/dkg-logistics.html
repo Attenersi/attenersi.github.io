@@ -62,12 +62,12 @@
   <section class="case-hero">
     <div class="kicker">Materiał · 01 — Badania operacyjne × Data Science</div>
     <h1 class="case-hero-headline">
-      Zaczęliśmy od <em>artykułów o RL.</em> Skończyliśmy na <em>heurystyce.</em>
+      Zaczęliśmy od <em>paperów o RL.</em> Skończyliśmy na <em>heurystyce.</em>
     </h1>
     <p class="case-hero-dek">
-      Studium przypadku optymalizacji załadunku dla De Keuken Groep. Cztery miesiące,
-      pięcioro studentów, trzy odrzucone podejścia, jedno wdrożenie produkcyjne —
-      a najważniejszą częścią okazała się droga przez jakość danych, ważniejsza niż którykolwiek z algorytmów.
+      Studium przypadku optymalizacji załadunku dla De Keuken Groep, na które złożyły się
+      cztery miesiące pracy, pięcioro studentów, trzy odrzucone podejścia i jedno wdrożenie
+      produkcyjne — a najważniejszą jego częścią okazała się droga przez jakość danych, istotniejsza niż którykolwiek z algorytmów.
     </p>
     <div class="case-hero-meta">
       <div class="case-hero-meta-item">Klient<strong>De Keuken Groep · Producent kuchni · Holandia</strong></div>
@@ -87,9 +87,9 @@
       </div>
       <div class="case-prose">
         <h2><em>Czterdzieści</em> ciężarówek dziennie. <em>Zero</em> wsparcia.</h2>
-        <p>De Keuken Groep to holenderski producent kuchni. Dziennie ładuje około czterdziestu ciężarówek gotowymi szafkami — ciężkimi i delikatnymi — w kolejności dostaw tak, by zamówienie ostatniego klienta nie znalazło się za pierwszym. Proces był w pełni ręczny, bez systematycznego planu, audytu ani rejestru tego, czy magazyn przestrzegał zasad delikatności i rozkładu ciężaru. Oczekiwanie: narzędzie optymalizacyjne, które zaproponuje załadunek bez kompromisów w kwestii bezpieczeństwa.</p>
-        <p class="no-dropcap">Ograniczeń szybko przybywało. Kolejność <strong>LIFO</strong> przy dostawie nie podlega negocjacjom. Elementy cięższe niż <strong>23&nbsp;kg</strong> nie mogą leżeć na lżejszych (holenderskie przepisy ARBO). Elementy delikatne nie mogą przenosić obciążenia. Maksymalna wysokość stosu to <strong>2,0&nbsp;m</strong>, by umożliwić bezpieczny rozładunek ręczny. Sześć typów ciężarówek, sześć różnych geometrii. A do tego zbiór danych, którego pierwsza wersja miała jakość <strong>52/100</strong> — z brakującymi 91&nbsp;% wartości długości (Length).</p>
-        <p class="no-dropcap">To tutaj naprawdę zaczął się projekt. Nie od kodu — od danych.</p>
+        <p>De Keuken Groep to holenderski producent kuchni, który dziennie ładuje około czterdziestu ciężarówek gotowymi szafkami — ciężkimi i delikatnymi — w kolejności dostaw tak, by zamówienie ostatniego klienta nie znalazło się za pierwszym. Proces był w pełni ręczny, bez systematycznego planu, audytu ani rejestru tego, czy magazyn przestrzegał zasad delikatności i rozkładu ciężaru, a oczekiwaniem klienta było narzędzie optymalizacyjne, które zaproponuje załadunek bez żadnych kompromisów w kwestii bezpieczeństwa.</p>
+        <p class="no-dropcap">Ograniczeń szybko przybywało: kolejność <strong>LIFO</strong> przy dostawie nie podlega negocjacjom, elementy cięższe niż <strong>23&nbsp;kg</strong> nie mogą leżeć na lżejszych (holenderskie przepisy ARBO), a elementy delikatne w ogóle nie mogą przenosić obciążenia. Do tego dochodzi maksymalna wysokość stosu <strong>2,0&nbsp;m</strong>, podyktowana bezpiecznym rozładunkiem ręcznym, oraz sześć typów ciężarówek o sześciu różnych geometriach. A wszystko to opierało się na zbiorze danych, którego pierwsza wersja miała jakość zaledwie <strong>52/100</strong>, z brakującymi 91&nbsp;% wartości <em>Length</em>.</p>
+        <p class="no-dropcap">I to właśnie tutaj naprawdę zaczął się projekt — nie od kodu, lecz od danych.</p>
       </div>
     </section>
 
@@ -100,13 +100,13 @@
       </div>
       <div class="case-prose">
         <h2>Pierwszy zbiór danych miał <em>więcej luk</em> niż danych.</h2>
-        <p>Przez pierwsze sześć tygodni towarzyszył nam problem, którego nikt nie chciał wypowiedzieć na głos: nie byliśmy w stanie zbudować niczego sensownego. Propozycja z października obiecywała zaawansowany algorytm pakowania 3D zintegrowany z SAP. Zbiór danych z początku października mówił co innego — jakość 52/100, brak długości (Length) w 90,92&nbsp;% rekordów, brak szerokości (Width) w 71,28&nbsp;% i wysokości (Height) w 65,95&nbsp;%. Komplet trzech wymiarów miało zaledwie 25&nbsp;% rekordów. Reszta to luki.</p>
+        <p>Przez pierwsze sześć tygodni towarzyszył nam problem, którego nikt nie chciał wypowiedzieć na głos — nie byliśmy w stanie zbudować niczego sensownego. O ile propozycja z października obiecywała zaawansowany algorytm 3D bin packing zintegrowany z SAP, o tyle zbiór danych z początku tego samego miesiąca mówił coś zupełnie innego: jakość 52/100, brak <em>Length</em> w 90,92&nbsp;% rekordów, brak <em>Width</em> w 71,28&nbsp;% i <em>Height</em> w 65,95&nbsp;%. Komplet trzech wymiarów miało zaledwie 25&nbsp;% rekordów, a cała reszta to były luki.</p>
 
-        <p class="no-dropcap">Pierwszy raport jakości danych (Data Quality Report) napisałem 7 października. Reakcja zespołu: „ten zbiór danych nie jest najlepszy”. Drugi powstał miesiąc później. Było lepiej — 88,9&nbsp;% kompletności — ale pojawiło się <strong>121&nbsp;576 rekordów z długością równą dokładnie zero</strong>. Szafka nie może mieć zerowej długości. Zamieniliśmy jeden problem na drugi.</p>
+        <p class="no-dropcap">Pierwszy Data Quality Report napisałem 7 października, a reakcja zespołu sprowadziła się do stwierdzenia, że „ten zbiór danych nie jest najlepszy”. Drugi raport powstał miesiąc później i choć było lepiej — 88,9&nbsp;% kompletności — pojawiło się w nim <strong>121&nbsp;576 rekordów z <em>Length</em> równym dokładnie zero</strong>. Skoro szafka nie może mieć zerowej długości, w praktyce zamieniliśmy jeden problem na drugi.</p>
 
-        <p class="no-dropcap">Przy trzecim zbiorze danych mieliśmy już strategię awaryjną. Pięć kolumn wymiarowych zamiast trzech — gdy brakowało długości (Length), system sięgał po głębokość (Depth) <strong>227&nbsp;427 razy</strong>, a po grubość (Thickness) zamiast szerokości (Width) <strong>50&nbsp;788 razy</strong>. Gdy i to zawodziło, model Random Forest uzupełniał wartości na podstawie skorelowanych cech.</p>
+        <p class="no-dropcap">Przy trzecim zbiorze danych mieliśmy już strategię fallback opartą na pięciu kolumnach wymiarowych zamiast trzech: gdy brakowało <em>Length</em>, system sięgał po <em>Depth</em> (<strong>227&nbsp;427 razy</strong>), a w miejsce <em>Width</em> podstawiał <em>Thickness</em> (<strong>50&nbsp;788 razy</strong>). Gdy zawodziło i to, brakujące wartości uzupełniał model Random Forest na podstawie skorelowanych cech.</p>
 
-        <p class="no-dropcap">Trzeci raport zamknął tę pętlę. Jakość produkcyjna <strong>95,8/100</strong>. <strong>99,5&nbsp;%</strong> rekordów z trzema użytecznymi wymiarami. 47 dni, trzy iteracje, jeden uporządkowany zbiór danych.</p>
+        <p class="no-dropcap">Trzeci raport zamknął tę pętlę wynikiem produkcyjnym <strong>95,8/100</strong> i <strong>99,5&nbsp;%</strong> rekordów z trzema użytecznymi wymiarami. W sumie 47 dni, trzy iteracje i jeden uporządkowany zbiór danych.</p>
 
         <div class="dqr-progression">
           <div class="dqr-progression-label">
@@ -146,7 +146,7 @@
           </svg>
         </div>
 
-        <p class="no-dropcap">To była jedyna faza, w której wiedzieliśmy, co robimy.</p>
+        <p class="no-dropcap">Była to, jak się później okazało, jedyna faza projektu, w której naprawdę wiedzieliśmy, co robimy.</p>
       </div>
     </section>
 
@@ -157,13 +157,13 @@
       </div>
       <div class="case-prose">
         <h2>Tygodniami trenowaliśmy modele <em>na pytanie, na które DKG znało już odpowiedź.</em></h2>
-        <p>Na początku listopada pojawił się drugi problem: źle zrozumieliśmy samo pytanie. Tygodniami trenowaliśmy sieci rekurencyjne (RNN), by <em>przewidywały</em> kolejność załadunku. LSTM i pozostałe modele — w nadziei, że sieć nauczy się wzorców wypracowanych przez doświadczonych pracowników magazynu.</p>
-        <p class="no-dropcap">Wyniki rozczarowały. Błąd MAE dla LSTM wyniósł <strong>5,52</strong> wobec <strong>5,84</strong> dla losowego punktu odniesienia. Model niczego się właściwie nie nauczył.</p>
-        <p class="no-dropcap">Zwrot nastąpił 4 listopada: DKG zna kolejność załadunku — wynika ona z trasy. Ostatni klient na trasie ładowany jest jako pierwszy. Niewiadomą nie była sekwencja, lecz <em>rozmieszczenie</em>.</p>
+        <p>Na początku listopada pojawił się drugi problem — okazało się, że źle zrozumieliśmy samo pytanie. Tygodniami trenowaliśmy sieci rekurencyjne (RNN), w tym LSTM i pokrewne modele, by <em>przewidywały</em> kolejność załadunku, licząc na to, że sieć sama nauczy się wzorców wypracowanych przez doświadczonych pracowników magazynu.</p>
+        <p class="no-dropcap">Wyniki okazały się rozczarowujące — błąd MAE dla LSTM wyniósł <strong>5,52</strong> wobec <strong>5,84</strong> dla losowego baseline’u, co oznaczało, że model właściwie niczego się nie nauczył.</p>
+        <p class="no-dropcap">Zwrot nastąpił 4 listopada, gdy uświadomiliśmy sobie, że DKG zna kolejność załadunku, bo wynika ona wprost z trasy — ostatni klient na trasie ładowany jest jako pierwszy. Niewiadomą nie była więc sekwencja, lecz <em>rozmieszczenie</em> szafek w środku.</p>
 
         <div class="pull-quote">„DKG zna kolejność załadunku. Nie wie, jak poprawnie ułożyć szafki w środku ciężarówki.”</div>
 
-        <p class="no-dropcap">Porzuciliśmy uczenie głębokie. Prawdziwym problemem było pakowanie 3D (3D bin packing).</p>
+        <p class="no-dropcap">Porzuciliśmy więc deep learning, ponieważ prawdziwym problemem okazało się 3D bin packing.</p>
       </div>
     </section>
 
@@ -174,32 +174,27 @@
       </div>
       <div class="case-prose">
         <h2>Najmądrzejsze podejście <em>raz po raz przegrywało</em> z najprostszym.</h2>
-        <p>Miesiąc prób, które nie przyniosły rezultatu.</p>
+        <p>Przez miesiąc próbowaliśmy rozwiązań, z których żadne nie przyniosło rezultatu.</p>
 
         <h3><em>CP-SAT.</em> Matematycznie eleganckie. Operacyjnie bezużyteczne.</h3>
-        <p class="no-dropcap">Google OR-Tools — programowanie z ograniczeniami. Każde ograniczenie zakodowane, solver przeszukuje przestrzeń rozwiązań. Dla pięćdziesięciu pozycji oznaczało to tysiące zmiennych boolowskich i dziesiątki tysięcy klauzul. Przy ośmiu wątkach i dziesięciominutowych limitach czasu solver zwracał rozwiązania z szafkami zawieszonymi „w powietrzu”. Latające kuchnie. Fizycznie niemożliwe ułożenia. Udokumentowaliśmy to jako spektakularną porażkę i poszliśmy dalej.</p>
+        <p class="no-dropcap">Sięgnęliśmy po Google OR-Tools i constraint programming, gdzie każde ograniczenie jest zakodowane, a solver przeszukuje przestrzeń rozwiązań — przy pięćdziesięciu pozycjach oznaczało to jednak tysiące zmiennych boolowskich i dziesiątki tysięcy klauzul. Przy ośmiu wątkach i dziesięciominutowych limitach czasu solver zwracał rozwiązania z szafkami zawieszonymi „w powietrzu”, czyli latające kuchnie w fizycznie niemożliwych ułożeniach. Udokumentowaliśmy to jako spektakularną porażkę i poszliśmy dalej.</p>
 
         <h3><em>Maskable PPO.</em> Mistrz upakowania bez żadnych gwarancji.</h3>
-        <p class="no-dropcap">Uczenie przez wzmacnianie — ciężarówka jako trójwymiarowa siatka, agent uczy się poprzez nagrody. W trzeciej iteracji: <strong>45,7&nbsp;%</strong> wykorzystania objętości, <strong>886 z 941</strong> pozycji, wielowarstwowe stosy bez jawnego programowania reguł. Ale trening trwał godzinami na iterację, a probabilistyczna natura RL sprawia, że nie da się <em>zagwarantować</em> przestrzegania zasad delikatności ani LIFO przy każdym zamówieniu. Agent nauczył się bezpieczeństwa jako tendencji, a nie jako twardej reguły.</p>
+        <p class="no-dropcap">W podejściu opartym na reinforcement learning ciężarówka była trójwymiarową siatką, a agent uczył się poprzez nagrody i w trzeciej iteracji osiągnął <strong>45,7&nbsp;%</strong> wykorzystania objętości, <strong>886 z 941</strong> pozycji oraz wielowarstwowe stosy bez jawnego programowania reguł. Problem polegał jednak na tym, że trening trwał godzinami na iterację, a probabilistyczna natura RL sprawia, iż nie da się <em>zagwarantować</em> przestrzegania zasad delikatności ani LIFO przy każdym zamówieniu — agent nauczył się bezpieczeństwa jako tendencji, a nie jako twardej reguły.</p>
 
         <h3><em>DBLF.</em> Deterministyczne. Zgodne z regułami. Wdrożone.</h3>
-        <p class="no-dropcap">Deepest-Bottom-Left-Fill — zbudowane na samym końcu. Sortowanie według sekwencji (najwyższy numer najgłębiej), następnie według wagi, a potem objętości. Każda pozycja umieszczana zachłannie w najgłębszym, najniższym i najbardziej wysuniętym w lewo dopuszczalnym miejscu. Twarde ograniczenia działają jak filtry, a nie kary — naruszenie oznacza odrzucenie. Pełen determinizm: identyczne dane wejściowe dają identyczny wynik. Poniżej minuty na tysiąc pozycji. Zgodność z regułami gwarantowana już na poziomie konstrukcji.</p>
+        <p class="no-dropcap">Deepest-Bottom-Left-Fill zbudowaliśmy na samym końcu i opiera się on na sortowaniu według sekwencji (najwyższy numer najgłębiej), następnie wagi, a na końcu objętości, przy czym każda pozycja umieszczana jest zachłannie w najgłębszym, najniższym i najbardziej wysuniętym w lewo dopuszczalnym miejscu. Twarde ograniczenia działają tu jak filtry, a nie kary, więc każde naruszenie oznacza po prostu odrzucenie, a dzięki pełnemu determinizmowi identyczne dane wejściowe zawsze dają identyczny wynik. Algorytm działa w czasie poniżej minuty na tysiąc pozycji, a zgodność z regułami jest w nim gwarantowana już na poziomie konstrukcji.</p>
 
-        <p class="no-dropcap">DBLF wygrało nie dlatego, że było najmądrzejsze. W obszarze twardych reguł fizycznych — przepisy ARBO, delikatność, LIFO — gwarancje są ważniejsze niż gęstość upakowania. Ciężarówka załadowana w 45&nbsp;% z okazjonalnie stłuczoną szybą jest gorsza niż załadowana w 33&nbsp;%, która nigdy nie powoduje takiej szkody.</p>
+        <p class="no-dropcap">DBLF wygrało nie dlatego, że było najmądrzejsze, lecz dlatego, że w obszarze twardych reguł fizycznych — przepisów ARBO, delikatności i LIFO — gwarancje liczą się bardziej niż gęstość upakowania. Ciężarówka załadowana w 45&nbsp;% z okazjonalnie stłuczoną szybą jest bowiem gorsza niż ta załadowana w 33&nbsp;%, która nigdy nie powoduje takiej szkody.</p>
 
         <div class="pull-quote">„RL było mistrzem upakowania. Nie potrafiło jednak obiecać, że nie złamie przepisów.”</div>
 
-        <figure class="case-figure case-figure--wide" data-gallery="dkg-case">
-          <div class="case-figure-media">
-            <img
-              src="../../assets/dkg/streamlit-3d.png"
-              width="3385"
-              height="1314"
-              alt="Wizualizacja 3D załadowanej ciężarówki w Streamlit — szafki w kolorach sekwencji"
-              loading="lazy"
-              decoding="async">
-          </div>
-          <figcaption>Rys. 01 — Prototyp Streamlit, wizualizacja 3D. Kolory oznaczają sekwencję; elementy delikatne na czerwonym szkielecie. Kliknij, aby powiększyć.</figcaption>
+        <figure class="case-figure" data-gallery="dkg-case">
+          <img
+            src="../../assets/dkg/streamlit-3d.png"
+            alt="Wizualizacja 3D załadowanej ciężarówki w Streamlit — szafki w kolorach sekwencji"
+            loading="lazy">
+          <figcaption>Rys. 01 — Prototyp Streamlit, wizualizacja 3D. Kolory oznaczają sekwencję; elementy delikatne na czerwonym szkielecie.</figcaption>
         </figure>
       </div>
     </section>
@@ -211,40 +206,30 @@
       </div>
       <div class="case-prose">
         <h2>Magazyn <em>nie ma czasu</em> na nasz dashboard 3D.</h2>
-        <p>W połowie listopada pokazaliśmy Jeroenowi z DKG interaktywny dashboard 3D. Obracanie ciężarówki, przybliżanie, kliknięcie w szafkę otwierające jej metadane. Byliśmy dumni. Reakcja Jeroena zmieściła się w kilku słowach — zbyt krótkich, by je złagodzić.</p>
+        <p>W połowie listopada pokazaliśmy Jeroenowi z DKG interaktywny dashboard 3D, w którym można było obracać ciężarówkę, przybliżać widok i klikać w poszczególne szafki, by otworzyć ich metadane. Byliśmy z niego dumni, ale reakcja Jeroena zmieściła się w kilku słowach — zbyt krótkich, by dało się je złagodzić.</p>
 
         <div class="pull-quote">„Ta wizualizacja może się nie sprawdzić — jest za skomplikowana.”</div>
 
-        <p class="no-dropcap">Wyjaśnił: pracownicy ekspedycji — z ciężkimi szafkami w rękach i zabrudzonymi dłońmi — nie będą obracać modeli 3D na tablecie. Potrzebują planu na papierze, czytanego wiersz po wierszu.</p>
+        <p class="no-dropcap">Wyjaśnił, że pracownicy ekspedycji — z ciężkimi szafkami w rękach i zabrudzonymi dłońmi — nie będą obracać modeli 3D na tablecie, ponieważ potrzebują planu na papierze, który czyta się wiersz po wierszu.</p>
 
-        <p class="no-dropcap">Zwrot w ciągu tygodnia. Nowy produkt: lista kontrolna w formacie PDF, w orientacji poziomej, sześć pozycji na stronę, próbki kolorów obok miniatury 3D, oznaczenia FRAGILE — delikatne (czerwone) i HEAVY — ciężkie (&gt;30&nbsp;kg). Naklejka na szafkę zawierała numer artykułu, numer sekwencji, wagę i strzałki THIS SIDE UP. Widok 3D pozostał w biurze. Magazyn dostał papier.</p>
+        <p class="no-dropcap">Zwrot zajął nam tydzień, a jego efektem był zupełnie nowy produkt: lista kontrolna w formacie PDF, w orientacji poziomej, z sześcioma pozycjami na stronę, próbkami kolorów obok miniatury 3D oraz oznaczeniami FRAGILE — delikatne (czerwone) i HEAVY — ciężkie (&gt;30&nbsp;kg). Każda szafka dostawała naklejkę z numerem artykułu, numerem sekwencji, wagą i strzałkami THIS SIDE UP, a podczas gdy widok 3D pozostał w biurze, magazyn dostał papier.</p>
 
-        <p class="no-dropcap">Ta rozmowa zamknęła fazę „algorytmów” i otworzyła fazę „produktu”.</p>
+        <p class="no-dropcap">To właśnie ta rozmowa zamknęła fazę „algorytmów” i otworzyła fazę „produktu”.</p>
 
-        <div class="case-figure-grid case-figure-grid--paper">
-          <figure class="case-figure case-figure--portrait-lg" data-gallery="dkg-case">
-            <div class="case-figure-media">
-              <img
-                src="../../assets/dkg/checklist.png"
-                width="1125"
-                height="1333"
-                alt="Pozioma checklista PDF załadunku — sześć pozycji i widok 3D ciężarówki"
-                loading="lazy"
-                decoding="async">
-            </div>
-            <figcaption>Rys. 02 — Drukowana lista kontrolna załadunku. Tabela i widok 3D na krok załadunku. Kliknij, aby powiększyć.</figcaption>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 2.5rem 0;">
+          <figure class="case-figure" data-gallery="dkg-case" style="margin: 0;">
+            <img
+              src="../../assets/dkg/checklist.png"
+              alt="Pozioma checklista PDF załadunku — sześć pozycji i widok 3D ciężarówki"
+              loading="lazy">
+            <figcaption>Rys. 02 — Drukowana lista kontrolna załadunku.</figcaption>
           </figure>
-          <figure class="case-figure case-figure--portrait" data-gallery="dkg-case">
-            <div class="case-figure-media">
-              <img
-                src="../../assets/dkg/sticker.png"
-                width="858"
-                height="1339"
-                alt="Arkusz naklejek — Article ID, numer sekwencji, ostrzeżenie HEAVY, pozycja w ciężarówce"
-                loading="lazy"
-                decoding="async">
-            </div>
-            <figcaption>Rys. 03 — Naklejki na szafki na hali. Kliknij, aby powiększyć.</figcaption>
+          <figure class="case-figure" data-gallery="dkg-case" style="margin: 0;">
+            <img
+              src="../../assets/dkg/sticker.png"
+              alt="Naklejka na szafkę — Article ID, numer sekwencji, ostrzeżenie HEAVY, strzałki THIS SIDE UP"
+              loading="lazy">
+            <figcaption>Rys. 03 — Naklejka na szafkę używana na hali.</figcaption>
           </figure>
         </div>
       </div>
@@ -257,7 +242,7 @@
       </div>
       <div class="case-prose">
         <h2>Jak wyglądały <em>końcowe liczby</em> — i czego nie mierzyły.</h2>
-        <p>System zwalidowano na 2&nbsp;230 historycznych zleceniach transportowych obejmujących 1&nbsp;018&nbsp;368 pozycji.</p>
+        <p>System zwalidowaliśmy na 2&nbsp;230 historycznych zleceniach transportowych, które łącznie obejmowały 1&nbsp;018&nbsp;368 pozycji.</p>
 
         <div class="stat-block">
           <div class="stat-block-item">
@@ -292,7 +277,7 @@
           </div>
         </div>
 
-        <p class="no-dropcap">Różnica 1,39&nbsp;% zasługuje na osobne zdanie. To nie porażka algorytmu, lecz koszt gwarantowanej zgodności z regułami. Człowiek może przechylić element, ścisnąć opakowanie czy złamać LIFO, by wcisnąć ostatnią szafkę. Algorytm tego nie zrobi. Wdrożyliśmy wersję, która woli nie stłuc szyby.</p>
+        <p class="no-dropcap">Różnica 1,39&nbsp;% zasługuje na osobne zdanie, ponieważ nie jest porażką algorytmu, lecz kosztem gwarantowanej zgodności z regułami. Tam, gdzie człowiek może przechylić element, ścisnąć opakowanie czy złamać LIFO, byle wcisnąć ostatnią szafkę, algorytm tego nie zrobi — świadomie wdrożyliśmy wersję, która woli nie stłuc szyby.</p>
       </div>
     </section>
 
@@ -303,14 +288,14 @@
       </div>
       <div class="case-prose">
         <h2>Nie odpowiadałem za <em>algorytm.</em> Odpowiadałem za <em>produkt.</em></h2>
-        <p>Zespół liczył pięć osób. Heurystyka DBLF była dziełem Ashrafa, model RL — Mohameda, rdzeń preprocessingu — Marka. Reszta, mierząc nakładem pracy, należała do mnie.</p>
+        <p>Zespół liczył pięć osób, w którym heurystyka DBLF była dziełem Ashrafa, model RL — Mohameda, a rdzeń preprocessingu — Marka. Reszta, mierząc nakładem pracy, należała do mnie.</p>
 
         <div class="owned-list">
           <div class="owned-list-head">Za co odpowiadałem</div>
           <ul>
             <li>Trzy iteracje <em>raportów jakości danych</em> — od 25,5&nbsp;% do 99,5&nbsp;% użytecznych rekordów</li>
             <li><em>Dokument wymagań biznesowych (BRD)</em> oraz interaktywna <em>macierz śledzenia wymagań</em></li>
-            <li><em>Pierwszy prototyp w Streamlit</em> — wczesny model RL z widokiem 3D; później przebudowany na heurystykę Bottom-Left</li>
+            <li><em>Pierwszy prototyp w Streamlit</em> — początkowo z wczesnym modelem RL i widokiem 3D, później przebudowany na heurystykę Bottom-Left</li>
             <li><em>Warstwa etyczna i prawna</em> — regulamin użytkowania, lista kontrolna „Reality Gap”, mechanizm awaryjnego wyłączenia i oświadczenie o odpowiedzialności, pozycjonowanie systemu jako narzędzia wspomagającego decyzje (Decision Support System)</li>
             <li>Dashboardy <em>Power BI</em> — porównanie modeli oraz widok zarządczy</li>
             <li>Rola <em>Scrum Mastera</em> w ostatnim sprincie</li>
@@ -318,23 +303,18 @@
           </ul>
         </div>
 
-        <figure class="case-figure case-figure--ui" data-gallery="dkg-case">
-          <div class="case-figure-media">
-            <img
-              src="../../assets/dkg/kill-switch.png"
-              width="1342"
-              height="1087"
-              alt="Ekran umowy odpowiedzialności w Streamlit przed eksportem planu załadunku"
-              loading="lazy"
-              decoding="async">
-          </div>
-          <figcaption>Rys. 04 — Punkt kontroli odpowiedzialności przed eksportem. Decision Support System w praktyce. Kliknij, aby powiększyć.</figcaption>
+        <figure class="case-figure" data-gallery="dkg-case">
+          <img
+            src="../../assets/dkg/kill-switch.png"
+            alt="Ekran umowy odpowiedzialności w Streamlit przed eksportem planu załadunku"
+            loading="lazy">
+          <figcaption>Rys. 04 — Ekran oświadczenia o odpowiedzialności w Streamlit. Pozycjonowanie jako system wspomagający decyzje w praktyce.</figcaption>
         </figure>
 
         <h3>Czego się nauczyłem.</h3>
-        <p class="no-dropcap">Wyrafinowanie nie jest wartością samą w sobie. W obszarze twardych ograniczeń „najmądrzejszy” model to ten, który potrafi udowodnić, że nie złamie reguły — a nie ten z najlepszym wynikiem w benchmarku. Rozwiązanie deterministyczne było tym właściwym. Musieliśmy pomylić się trzy razy, żeby to dostrzec.</p>
+        <p class="no-dropcap">Wyrafinowanie nie jest wartością samą w sobie, ponieważ w obszarze twardych ograniczeń „najmądrzejszy” model to ten, który potrafi udowodnić, że nie złamie reguły, a nie ten z najlepszym wynikiem w benchmarku. Rozwiązanie deterministyczne było tym właściwym, choć musieliśmy pomylić się trzy razy, żeby to dostrzec.</p>
 
-        <p class="no-dropcap">Druga lekcja jest starsza — pochodzi z sześciu lat pracy na hali: <em>ludzie przy pracy potrzebują jednego zdania, by ocenić, że interfejs jest zły. Jeroenowi wystarczyło kilka słów. Posłuchaliśmy.</em></p>
+        <p class="no-dropcap">Druga lekcja jest starsza i pochodzi z sześciu lat pracy na hali: <em>ludziom w trakcie pracy wystarcza jedno zdanie, by ocenić, że interfejs jest zły — Jeroenowi wystarczyło kilka słów, a my ich posłuchaliśmy.</em></p>
       </div>
     </section>
 
