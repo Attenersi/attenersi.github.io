@@ -121,11 +121,10 @@
         </div>
 
         <figure class="case-figure">
-          <a class="placeholder" href="#" onclick="return false;" aria-label="Placeholder for chat with RAG citations">
-            <span class="ph-label">Placeholder · screenshot</span>
-            <span class="ph-desc">Atrio chat — user asks an FM question, response streams with cited sources panel visible underneath (used_sources)</span>
-            <span class="ph-dims">→ ./assets/atrio/chat-rag.jpg · 16:10</span>
-          </a>
+          <img
+            src="../assets/atrio/chat-rag.png"
+            alt="Atrio chat interface with grounded response and created ticket"
+            loading="lazy">
           <figcaption>Fig. 01 — Chat interface with grounded answer and cited sources.</figcaption>
         </figure>
       </div>
@@ -173,46 +172,45 @@
         <p class="no-dropcap">This is also where most of the iteration time goes. Retrieval quality is a slow drift you measure once a week. Decision quality is what changes the moment you add a new category, a new building, or a new edge case.</p>
 
         <figure class="case-figure">
-          <a class="placeholder" href="#" onclick="return false;" aria-label="Placeholder for auto-ticket creation (multi-issue)">
-            <span class="ph-label">Placeholder · screenshot</span>
-            <span class="ph-desc">Auto-ticket creation in action — single chat message containing two issues becomes two tickets, both visible in the resulting ticket list</span>
-            <span class="ph-dims">→ ./assets/atrio/multi-ticket.jpg · 16:10</span>
-          </a>
+          <img
+            src="../assets/atrio/multi-ticket.png"
+            alt="Atrio chat where one message creates multiple maintenance tickets"
+            loading="lazy">
           <figcaption>Fig. 02 — One message, two tickets. Multi-issue parsing in the dashboard.</figcaption>
         </figure>
 
         <figure class="case-figure">
-          <a class="placeholder" href="#" onclick="return false;" aria-label="Placeholder for ticket dashboard">
-            <span class="ph-label">Placeholder · screenshot</span>
-            <span class="ph-desc">Ticket dashboard — filtered list view with status colours, category/priority columns, CSV export visible</span>
-            <span class="ph-dims">→ ./assets/atrio/dashboard.jpg · 16:10</span>
-          </a>
+          <img
+            src="../assets/atrio/dashboard.png"
+            alt="Atrio operations dashboard with categories, priorities, and ticket list"
+            loading="lazy">
           <figcaption>Fig. 03 — Ticket dashboard, the operations side of the product.</figcaption>
         </figure>
       </div>
     </section>
 
-    <!-- ----- §05 Building the feedback loop ----- -->
+    <!-- ----- §05 The decision layer ----- -->
     <section class="case-section">
       <div class="case-section-label">
         <span class="case-section-num">§ 05</span>
-        The loop
+        The decision layer
       </div>
       <div class="case-prose">
-        <h2>The product gets better when the <em>admin</em> side does.</h2>
-        <p>A chatbot that ships without a way to improve it ships once. The half of Atrio that nobody asks for in a demo is the admin layer: a place to register documents, see which questions had no good answer (knowledge gaps), review past conversations, run the RAG evaluation suite, and edit the prompts and rules that govern behaviour. This is where the project stops feeling like a chatbot and starts feeling like a system.</p>
+        <h2>The rules live in <em>code</em>, not in the prompt.</h2>
+        <p>If retrieval is the easy third and the chat is the visible third, the decision layer is the part that actually matters and nobody asks to see. It's the code that stands between what the model proposes and what the system commits: deduplication against open tickets, priority caps on certain categories, category overrides, the injection refusal path. The model hands over a structured guess about what a message is; this layer decides what, if anything, happens because of it. Putting those rules in version-controlled code rather than in a prompt is a deliberate choice — I can read them, test them, and change one without renegotiating with a model integration.</p>
 
-        <p class="no-dropcap">The evaluation suite is the load-bearing part. There's a test file (<code style="font-family: var(--font-mono); font-size: 0.85em; padding: 0.15em 0.4em; background: var(--bg); border: 1px solid var(--rule);">atrio_test_cases.json</code>) with hand-curated cases — the kinds of messages I want to behave correctly. The runner produces two metrics: <em>pass_rate</em> across all cases, and <em>api_ok_pass_rate</em>, which strips out transport failures and tells me the logic quality when the API actually responded. The first tells me whether the system is up. The second tells me whether it's right.</p>
+        <p class="no-dropcap">This is also the part that has to be defended rather than merely built. A model that confidently misclassifies one message in fifty is invisible at demo time and dangerous at scale. So the layer is mostly subtraction: things the model is <em>not</em> allowed to do on its own. Open a duplicate ticket on an issue that's already tracked. Escalate a routine category to top priority. Act on a message that's really an injection attempt wearing a complaint. Each of those is a rule, not a hope.</p>
 
-        <p class="no-dropcap">The intended workflow is a loop. Conversations come in. The admin reviews the difficult ones. Cases that revealed weaknesses get added to the eval set. Prompts get edited. The eval suite runs. The pass-rate either goes up or it doesn't. If it doesn't, the change was bad. If it does, the change is the new baseline.</p>
+        <div class="pull-quote">"The interesting part of an LLM product isn't what the model can do. It's what you've decided it isn't allowed to do on its own."</div>
+
+        <p class="no-dropcap">An eval suite keeps this layer honest. There's a file of hand-curated cases — the messages I want to behave a specific way — and a runner that scores the system against them. I watch two numbers: one for whether the system responded at all, and one for whether it responded <em>correctly</em> once transport failures are stripped out. The first tells me it's up. The second tells me it's right. The loop is simple and the whole point: difficult conversations get reviewed, the ones that exposed a weakness become new test cases, a rule or prompt gets edited, the suite re-runs. If the correctness number goes up, the change is the new baseline. If it doesn't, the change was wrong and I revert it. The eval isn't the product — it's the thing that stops me from lying to myself about whether the decision layer got better.</p>
 
         <figure class="case-figure">
-          <a class="placeholder" href="#" onclick="return false;" aria-label="Placeholder for admin training-quality screen">
-            <span class="ph-label">Placeholder · screenshot</span>
-            <span class="ph-desc">Admin /training-quality — eval run results, pass_rate and api_ok_pass_rate visible, analyzer suggestions or prompt override panel</span>
-            <span class="ph-dims">→ ./assets/atrio/admin-eval.jpg · 16:10</span>
-          </a>
-          <figcaption>Fig. 04 — Admin evaluation surface. Where the loop closes.</figcaption>
+          <img
+            src="../assets/atrio/dashboard.png"
+            alt="Atrio admin and operations view used to tune decision behavior"
+            loading="lazy">
+          <figcaption>Fig. 04 — The admin surface where the decision layer is tuned and re-scored.</figcaption>
         </figure>
       </div>
     </section>
@@ -225,14 +223,14 @@
       </div>
       <div class="case-prose">
         <h2>What's <em>next.</em> What I'm <em>not</em> building.</h2>
-        <p>The next two weeks are about quality, not features. Better reranking before the LLM sees the chunks. Tighter rules around classification on the categories that misfire most. A more complete admin-review flow so that fixing a bad answer takes minutes instead of a deploy. Concretely: I want to move <em>api_ok_pass_rate</em> by a measurable amount before adding anything new.</p>
+        <p>The next two weeks are about quality, not features. Better reranking before the LLM sees the chunks. Tighter rules on the categories that misclassify most. A more complete admin-review flow so that fixing a bad decision takes minutes instead of a deploy. Concretely: I want the correctness score on the eval set to move by a measurable amount before anything new goes in.</p>
 
         <h3>Deliberately not in scope.</h3>
         <p class="no-dropcap"><strong>Enterprise plumbing.</strong> No SSO. No multi-tenant isolation. No SOC 2-shaped paperwork. Those are problems for a product that has paying users; Atrio doesn't, and I'm not pretending otherwise.</p>
-        <p class="no-dropcap"><strong>Heavy analytics.</strong> A Power BI-style operational dashboard is the kind of thing you build when the core decisions are reliable. Mine aren't yet.</p>
+        <p class="no-dropcap"><strong>Heavy analytics.</strong> A Power BI-style operational dashboard is the kind of thing you build when the core decisions are reliable. Mine aren't there yet.</p>
         <p class="no-dropcap"><strong>UX polish.</strong> The interface looks like what it is — a developer's working environment. It can be made beautiful later. Right now beauty would be a way to avoid harder work.</p>
 
-        <p class="no-dropcap">The bet is that core accuracy and ticket reliability are the only things worth optimising at this stage. Everything else is a distraction dressed as progress.</p>
+        <p class="no-dropcap">The bet is that decision reliability is the only thing worth optimising at this stage. Everything else is a distraction dressed as progress.</p>
       </div>
     </section>
 
