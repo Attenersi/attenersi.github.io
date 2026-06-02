@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-lang-en="./index.html" data-lang-pl="./pl/index.html">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,6 +19,10 @@
 <meta name="twitter:title" content="Mateusz Mosór — Portfolio · Issue 01">
 <meta name="twitter:description" content="FM × Data Science. Selected work in machine learning, BI, and operations research.">
 <meta name="twitter:image" content="./assets/og-image.png">
+
+<link rel="alternate" hreflang="en" href="./index.html">
+<link rel="alternate" hreflang="pl" href="./pl/index.html">
+<link rel="alternate" hreflang="x-default" href="./index.html">
 
 <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
 
@@ -55,6 +59,11 @@
           <a href="#career">Career</a>
           <a href="#contact">Contact</a>
         </nav>
+        <div class="lang-switch" role="navigation" aria-label="Language">
+          <a class="lang-switch-link is-active" href="./index.html" hreflang="en" lang="en" data-lang-choice="en">EN</a>
+          <span class="lang-switch-sep" aria-hidden="true">·</span>
+          <a class="lang-switch-link" href="./pl/index.html" hreflang="pl" lang="pl" data-lang-choice="pl">PL</a>
+        </div>
         <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle theme">Dark</button>
       </div>
     </div>
@@ -94,7 +103,7 @@
         <div class="article-aside-row">Author<strong>Mateusz Mosór</strong></div>
         <div class="article-aside-row">Studying<strong>BSc International Facility Management, Data Science &amp; AI minor. Breda University of Applied Sciences. Finishing June 2026.</strong></div>
         <div class="article-aside-row">Currently building<strong>Atrio — an FM co-pilot. Llama 3.1 + RAG. See <a href="#work" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);">.04</a>.</strong></div>
-        <div class="article-aside-row">Languages<strong>Polish · English (professional) · Dutch (elementary)</strong></div>
+        <div class="article-aside-row">Languages<strong>Polish · English (professional) · Dutch (elementary) · <a href="./pl/index.html" hreflang="pl" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);">Portfolio also in Polish</a></strong></div>
         <div class="article-aside-row">Outside work<strong>Esports · Football · Travel</strong></div>
       </aside>
       <div class="prose">

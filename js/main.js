@@ -8,6 +8,52 @@
    ============================================================ */
 
 
+/* ---------- Language preference (redirect + switch) --------- */
+
+(function langPreference() {
+  const KEY = 'mosor-lang';
+  const root = document.documentElement;
+  const currentLang = (root.lang || 'en').toLowerCase().slice(0, 2);
+  const enUrl = root.dataset.langEn;
+  const plUrl = root.dataset.langPl;
+  if (!enUrl || !plUrl) return;
+
+  const browserPrefersPl = () => {
+    const langs = navigator.languages && navigator.languages.length
+      ? navigator.languages
+      : [navigator.language || ''];
+    return langs.some(l => String(l).toLowerCase().startsWith('pl'));
+  };
+
+  let stored = null;
+  try { stored = localStorage.getItem(KEY); } catch (e) {}
+
+  let targetLang = currentLang;
+  if (stored === 'en' || stored === 'pl') {
+    targetLang = stored;
+  } else {
+    targetLang = browserPrefersPl() ? 'pl' : 'en';
+  }
+
+  if (targetLang !== currentLang) {
+    const dest = targetLang === 'pl' ? plUrl : enUrl;
+    if (dest) {
+      location.replace(dest);
+      return;
+    }
+  }
+
+  document.querySelectorAll('.lang-switch-link[data-lang-choice]').forEach(link => {
+    link.addEventListener('click', () => {
+      const choice = link.getAttribute('data-lang-choice');
+      if (choice === 'en' || choice === 'pl') {
+        try { localStorage.setItem(KEY, choice); } catch (e) {}
+      }
+    });
+  });
+})();
+
+
 /* ---------- Section reveal on scroll ---------------------- */
 
 (function sectionReveal() {
@@ -354,13 +400,18 @@
 (function themeToggle() {
   const toggle = document.getElementById('themeToggle');
   if (!toggle) return;
+  const isPl = (document.documentElement.lang || 'en').toLowerCase().startsWith('pl');
+  const labels = isPl
+    ? { dark: 'Ciemny', light: 'Jasny', aria: 'Przełącz motyw' }
+    : { dark: 'Dark', light: 'Light', aria: 'Toggle theme' };
+  toggle.setAttribute('aria-label', labels.aria);
   const setTheme = (mode) => {
     if (mode === 'dark') {
       document.body.classList.add('dark');
-      toggle.textContent = 'Light';
+      toggle.textContent = labels.light;
     } else {
       document.body.classList.remove('dark');
-      toggle.textContent = 'Dark';
+      toggle.textContent = labels.dark;
     }
     try { localStorage.setItem('mosor-theme', mode); } catch (e) {}
   };

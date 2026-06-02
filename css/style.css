@@ -174,6 +174,28 @@ body::before {
 .theme-toggle:hover { background: var(--ink); color: var(--bg); }
 
 
+/* ---------- 5b. Language switch --------------------------- */
+
+.lang-switch {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.lang-switch-link {
+  color: var(--muted);
+  text-decoration: none;
+  padding: 0.2rem 0.15rem;
+  transition: color .2s;
+}
+.lang-switch-link:hover { color: var(--ink); }
+.lang-switch-link.is-active { color: var(--accent); }
+.lang-switch-sep { color: var(--muted); opacity: 0.5; user-select: none; }
+
+
 /* ---------- 6. Hero --------------------------------------- */
 
 .hero {

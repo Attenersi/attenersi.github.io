@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-lang-en="../case/atrio.html" data-lang-pl="../pl/case/atrio.html">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,6 +18,10 @@
 <meta name="twitter:title" content="Retrieval is the easy part. Decisions are the hard part.">
 <meta name="twitter:description" content="Building Atrio — an AI assistant for facility-management teams. Notes on RAG after the demo.">
 <meta name="twitter:image" content="../assets/og-image.png">
+
+<link rel="alternate" hreflang="en" href="../case/atrio.html">
+<link rel="alternate" hreflang="pl" href="../pl/case/atrio.html">
+<link rel="alternate" hreflang="x-default" href="../case/atrio.html">
 
 <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 
@@ -50,6 +54,11 @@
       <a class="masthead-back" href="../index.html">Issue 01 · Mosór</a>
       <div class="masthead-nav-wrap">
         <span style="color: var(--muted);">Feature · 02 — Case Study</span>
+        <div class="lang-switch" role="navigation" aria-label="Language">
+          <a class="lang-switch-link is-active" href="../case/atrio.html" hreflang="en" lang="en" data-lang-choice="en">EN</a>
+          <span class="lang-switch-sep" aria-hidden="true">·</span>
+          <a class="lang-switch-link" href="../pl/case/atrio.html" hreflang="pl" lang="pl" data-lang-choice="pl">PL</a>
+        </div>
         <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle theme">Dark</button>
       </div>
     </div>
