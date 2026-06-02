@@ -55,7 +55,6 @@ Change them once and the entire site follows.
 ## Known TODOs
 
 - Set absolute `og:url` once the deployed URL is known (EN + PL pages).
-- `assets/dkg/` → add screenshots described in `assets/dkg/README.md` (placeholders until then).
 
 ## Local preview
 
