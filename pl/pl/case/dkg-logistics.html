@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="pl" data-lang-en="../../case/dkg-logistics.html" data-lang-pl="./dkg-logistics.html">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Załadunek kuchni i nauka, kiedy nie używać ML — Mateusz Mosór · Materiał 01</title>
+<meta name="description" content="Studium przypadku: optymalizacja załadunku ciężarówek dla De Keuken Groep. Cztery miesiące, pięcioro studentów, trzy odrzucone podejścia, jedno wdrożenie produkcyjne.">
+<meta name="author" content="Mateusz Mosór">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Załadunek kuchni i nauka, kiedy nie używać ML">
+<meta property="og:description" content="Studium przypadku: optymalizacja załadunku ciężarówek dla De Keuken Groep. Cztery miesiące, pięcioro studentów, trzy odrzucone podejścia, jedno wdrożenie.">
+<meta property="og:image" content="../../assets/og-image.png">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Załadunek kuchni i nauka, kiedy nie używać ML">
+<meta name="twitter:description" content="Studium przypadku: optymalizacja załadunku DKG. Autor: Mateusz Mosór.">
+<meta name="twitter:image" content="../../assets/og-image.png">
+
+<link rel="alternate" hreflang="en" href="../../case/dkg-logistics.html">
+<link rel="alternate" hreflang="pl" href="./dkg-logistics.html">
+<link rel="alternate" hreflang="x-default" href="../../case/dkg-logistics.html">
+
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+
+<div class="progress-bar" aria-hidden="true"><div class="progress-bar-fill"></div></div>
+
+<div class="lightbox" role="dialog" aria-hidden="true" aria-label="Podgląd obrazu">
+  <button class="lightbox-btn lb-close" type="button" aria-label="Zamknij">×</button>
+  <button class="lightbox-btn lb-prev" type="button" aria-label="Poprzedni obraz">‹</button>
+  <button class="lightbox-btn lb-next" type="button" aria-label="Następny obraz">›</button>
+  <img alt="">
+  <div class="lb-counter"></div>
+</div>
+
+<div class="container">
+
+  <header class="masthead">
+    <div class="masthead-row">
+      <a class="masthead-back" href="../index.html">Wydanie 01 · Mosór</a>
+      <div class="masthead-nav-wrap">
+        <span style="color: var(--muted);">Materiał · 01 — Studium przypadku</span>
+        <div class="lang-switch" role="navigation" aria-label="Język">
+          <a class="lang-switch-link" href="../../case/dkg-logistics.html" hreflang="en" lang="en" data-lang-choice="en">EN</a>
+          <span class="lang-switch-sep" aria-hidden="true">·</span>
+          <a class="lang-switch-link is-active" href="./dkg-logistics.html" hreflang="pl" lang="pl" data-lang-choice="pl">PL</a>
+        </div>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Przełącz motyw">Ciemny</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="case-hero">
+    <div class="kicker">Materiał · 01 — Badania operacyjne × Data Science</div>
+    <h1 class="case-hero-headline">
+      Zaczęliśmy od <em>artykułów o RL.</em> Skończyliśmy na <em>heurystyce.</em>
+    </h1>
+    <p class="case-hero-dek">
+      Studium przypadku optymalizacji załadunku dla De Keuken Groep. Cztery miesiące,
+      pięcioro studentów, trzy odrzucone podejścia, jedno wdrożenie produkcyjne —
+      a najważniejszą częścią okazała się droga przez jakość danych, ważniejsza niż którykolwiek z algorytmów.
+    </p>
+    <div class="case-hero-meta">
+      <div class="case-hero-meta-item">Klient<strong>De Keuken Groep · Producent kuchni · Holandia</strong></div>
+      <div class="case-hero-meta-item">Czas trwania<strong>wrzesień 2025 — styczeń 2026 · jeden semestr</strong></div>
+      <div class="case-hero-meta-item">Zespół<strong>5 studentów, minor Data Science &amp; AI, BUAS</strong></div>
+      <div class="case-hero-meta-item">Moja rola<strong>Jakość danych, produkt i BRD, pierwszy prototyp, warstwa etyczna i zgodność, prezentacja u klienta</strong></div>
+      <div class="case-hero-meta-item">Stack<strong>Python · Pandas · scikit-learn · Streamlit · Plotly · Docker · Power BI</strong></div>
+    </div>
+  </section>
+
+  <div class="case-body">
+
+    <section class="case-section">
+      <div class="case-section-label">
+        <span class="case-section-num">§ 01</span>
+        Założenia
+      </div>
+      <div class="case-prose">
+        <h2><em>Czterdzieści</em> ciężarówek dziennie. <em>Zero</em> wsparcia.</h2>
+        <p>De Keuken Groep to holenderski producent kuchni. Dziennie ładuje około czterdziestu ciężarówek gotowymi szafkami — ciężkimi i delikatnymi — w kolejności dostaw tak, by zamówienie ostatniego klienta nie znalazło się za pierwszym. Proces był w pełni ręczny, bez systematycznego planu, audytu ani rejestru tego, czy magazyn przestrzegał zasad delikatności i rozkładu ciężaru. Oczekiwanie: narzędzie optymalizacyjne, które zaproponuje załadunek bez kompromisów w kwestii bezpieczeństwa.</p>
+        <p class="no-dropcap">Ograniczeń szybko przybywało. Kolejność <strong>LIFO</strong> przy dostawie nie podlega negocjacjom. Elementy cięższe niż <strong>23&nbsp;kg</strong> nie mogą leżeć na lżejszych (holenderskie przepisy ARBO). Elementy delikatne nie mogą przenosić obciążenia. Maksymalna wysokość stosu to <strong>2,0&nbsp;m</strong>, by umożliwić bezpieczny rozładunek ręczny. Sześć typów ciężarówek, sześć różnych geometrii. A do tego zbiór danych, którego pierwsza wersja miała jakość <strong>52/100</strong> — z brakującymi 91&nbsp;% wartości długości (Length).</p>
+        <p class="no-dropcap">To tutaj naprawdę zaczął się projekt. Nie od kodu — od danych.</p>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="case-section-label">
+        <span class="case-section-num">§ 02</span>
+        Pustka danych
+      </div>
+      <div class="case-prose">
+        <h2>Pierwszy zbiór danych miał <em>więcej luk</em> niż danych.</h2>
+        <p>Przez pierwsze sześć tygodni towarzyszył nam problem, którego nikt nie chciał wypowiedzieć na głos: nie byliśmy w stanie zbudować niczego sensownego. Propozycja z października obiecywała zaawansowany algorytm pakowania 3D zintegrowany z SAP. Zbiór danych z początku października mówił co innego — jakość 52/100, brak długości (Length) w 90,92&nbsp;% rekordów, brak szerokości (Width) w 71,28&nbsp;% i wysokości (Height) w 65,95&nbsp;%. Komplet trzech wymiarów miało zaledwie 25&nbsp;% rekordów. Reszta to luki.</p>
+
+        <p class="no-dropcap">Pierwszy raport jakości danych (Data Quality Report) napisałem 7 października. Reakcja zespołu: „ten zbiór danych nie jest najlepszy”. Drugi powstał miesiąc później. Było lepiej — 88,9&nbsp;% kompletności — ale pojawiło się <strong>121&nbsp;576 rekordów z długością równą dokładnie zero</strong>. Szafka nie może mieć zerowej długości. Zamieniliśmy jeden problem na drugi.</p>
+
+        <p class="no-dropcap">Przy trzecim zbiorze danych mieliśmy już strategię awaryjną. Pięć kolumn wymiarowych zamiast trzech — gdy brakowało długości (Length), system sięgał po głębokość (Depth) <strong>227&nbsp;427 razy</strong>, a po grubość (Thickness) zamiast szerokości (Width) <strong>50&nbsp;788 razy</strong>. Gdy i to zawodziło, model Random Forest uzupełniał wartości na podstawie skorelowanych cech.</p>
+
+        <p class="no-dropcap">Trzeci raport zamknął tę pętlę. Jakość produkcyjna <strong>95,8/100</strong>. <strong>99,5&nbsp;%</strong> rekordów z trzema użytecznymi wymiarami. 47 dni, trzy iteracje, jeden uporządkowany zbiór danych.</p>
+
+        <div class="dqr-progression">
+          <div class="dqr-progression-label">
+            <span>Wynik jakości danych — trzy iteracje, 47 dni</span>
+            <span>52,0 → 95,8</span>
+          </div>
+          <svg viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Wykres postępu wyniku DQR">
+            <line x1="40" y1="180" x2="660" y2="180" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+            <text x="30" y="184" font-family="Geist Mono, monospace" font-size="10" fill="currentColor" opacity="0.5" text-anchor="end">0</text>
+            <text x="30" y="100" font-family="Geist Mono, monospace" font-size="10" fill="currentColor" opacity="0.5" text-anchor="end">50</text>
+            <text x="30" y="40" font-family="Geist Mono, monospace" font-size="10" fill="currentColor" opacity="0.5" text-anchor="end">100</text>
+            <line x1="35" y1="100" x2="40" y2="100" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+            <line x1="35" y1="40" x2="40" y2="40" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+
+            <rect x="100" y="107" width="120" height="73" fill="currentColor" opacity="0.2"/>
+            <line x1="100" y1="107" x2="220" y2="107" stroke="var(--accent)" stroke-width="2"/>
+            <text x="160" y="98" font-family="Instrument Serif, serif" font-size="24" fill="var(--accent)" text-anchor="middle">52.0</text>
+            <text x="160" y="200" font-family="Geist Mono, monospace" font-size="10" fill="currentColor" opacity="0.6" text-anchor="middle" letter-spacing="1">DQR 1 · 7 PAŹ</text>
+            <text x="160" y="214" font-family="Geist Mono, monospace" font-size="9" fill="currentColor" opacity="0.45" text-anchor="middle">25,5% UŻYTECZNYCH</text>
+
+            <rect x="280" y="65" width="120" height="115" fill="currentColor" opacity="0.2"/>
+            <line x1="280" y1="65" x2="400" y2="65" stroke="var(--accent)" stroke-width="2"/>
+            <text x="340" y="56" font-family="Instrument Serif, serif" font-size="24" fill="var(--accent)" text-anchor="middle">82.4</text>
+            <text x="340" y="200" font-family="Geist Mono, monospace" font-size="10" fill="currentColor" opacity="0.6" text-anchor="middle" letter-spacing="1">DQR 2 · 13 LIS</text>
+            <text x="340" y="214" font-family="Geist Mono, monospace" font-size="9" fill="currentColor" opacity="0.45" text-anchor="middle">~90,6% UŻYTECZNYCH</text>
+
+            <rect x="460" y="46" width="120" height="134" fill="currentColor" opacity="0.2"/>
+            <line x1="460" y1="46" x2="580" y2="46" stroke="var(--accent)" stroke-width="2"/>
+            <text x="520" y="37" font-family="Instrument Serif, serif" font-size="24" fill="var(--accent)" text-anchor="middle">95.8</text>
+            <text x="520" y="200" font-family="Geist Mono, monospace" font-size="10" fill="currentColor" opacity="0.6" text-anchor="middle" letter-spacing="1">DQR 3 · 23 LIS</text>
+            <text x="520" y="214" font-family="Geist Mono, monospace" font-size="9" fill="currentColor" opacity="0.45" text-anchor="middle">99,5% UŻYTECZNYCH</text>
+
+            <polyline points="160,107 340,65 520,46" fill="none" stroke="var(--accent)" stroke-width="1" stroke-dasharray="3,3" opacity="0.6"/>
+            <circle cx="160" cy="107" r="3" fill="var(--accent)"/>
+            <circle cx="340" cy="65" r="3" fill="var(--accent)"/>
+            <circle cx="520" cy="46" r="3" fill="var(--accent)"/>
+          </svg>
+        </div>
+
+        <p class="no-dropcap">To była jedyna faza, w której wiedzieliśmy, co robimy.</p>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="case-section-label">
+        <span class="case-section-num">§ 03</span>
+        Zły problem
+      </div>
+      <div class="case-prose">
+        <h2>Tygodniami trenowaliśmy modele <em>na pytanie, na które DKG znało już odpowiedź.</em></h2>
+        <p>Na początku listopada pojawił się drugi problem: źle zrozumieliśmy samo pytanie. Tygodniami trenowaliśmy sieci rekurencyjne (RNN), by <em>przewidywały</em> kolejność załadunku. LSTM i pozostałe modele — w nadziei, że sieć nauczy się wzorców wypracowanych przez doświadczonych pracowników magazynu.</p>
+        <p class="no-dropcap">Wyniki rozczarowały. Błąd MAE dla LSTM wyniósł <strong>5,52</strong> wobec <strong>5,84</strong> dla losowego punktu odniesienia. Model niczego się właściwie nie nauczył.</p>
+        <p class="no-dropcap">Zwrot nastąpił 4 listopada: DKG zna kolejność załadunku — wynika ona z trasy. Ostatni klient na trasie ładowany jest jako pierwszy. Niewiadomą nie była sekwencja, lecz <em>rozmieszczenie</em>.</p>
+
+        <div class="pull-quote">„DKG zna kolejność załadunku. Nie wie, jak poprawnie ułożyć szafki w środku ciężarówki.”</div>
+
+        <p class="no-dropcap">Porzuciliśmy uczenie głębokie. Prawdziwym problemem było pakowanie 3D (3D bin packing).</p>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="case-section-label">
+        <span class="case-section-num">§ 04</span>
+        Trzy porażki
+      </div>
+      <div class="case-prose">
+        <h2>Najmądrzejsze podejście <em>raz po raz przegrywało</em> z najprostszym.</h2>
+        <p>Miesiąc prób, które nie przyniosły rezultatu.</p>
+
+        <h3><em>CP-SAT.</em> Matematycznie eleganckie. Operacyjnie bezużyteczne.</h3>
+        <p class="no-dropcap">Google OR-Tools — programowanie z ograniczeniami. Każde ograniczenie zakodowane, solver przeszukuje przestrzeń rozwiązań. Dla pięćdziesięciu pozycji oznaczało to tysiące zmiennych boolowskich i dziesiątki tysięcy klauzul. Przy ośmiu wątkach i dziesięciominutowych limitach czasu solver zwracał rozwiązania z szafkami zawieszonymi „w powietrzu”. Latające kuchnie. Fizycznie niemożliwe ułożenia. Udokumentowaliśmy to jako spektakularną porażkę i poszliśmy dalej.</p>
+
+        <h3><em>Maskable PPO.</em> Mistrz upakowania bez żadnych gwarancji.</h3>
+        <p class="no-dropcap">Uczenie przez wzmacnianie — ciężarówka jako trójwymiarowa siatka, agent uczy się poprzez nagrody. W trzeciej iteracji: <strong>45,7&nbsp;%</strong> wykorzystania objętości, <strong>886 z 941</strong> pozycji, wielowarstwowe stosy bez jawnego programowania reguł. Ale trening trwał godzinami na iterację, a probabilistyczna natura RL sprawia, że nie da się <em>zagwarantować</em> przestrzegania zasad delikatności ani LIFO przy każdym zamówieniu. Agent nauczył się bezpieczeństwa jako tendencji, a nie jako twardej reguły.</p>
+
+        <h3><em>DBLF.</em> Deterministyczne. Zgodne z regułami. Wdrożone.</h3>
+        <p class="no-dropcap">Deepest-Bottom-Left-Fill — zbudowane na samym końcu. Sortowanie według sekwencji (najwyższy numer najgłębiej), następnie według wagi, a potem objętości. Każda pozycja umieszczana zachłannie w najgłębszym, najniższym i najbardziej wysuniętym w lewo dopuszczalnym miejscu. Twarde ograniczenia działają jak filtry, a nie kary — naruszenie oznacza odrzucenie. Pełen determinizm: identyczne dane wejściowe dają identyczny wynik. Poniżej minuty na tysiąc pozycji. Zgodność z regułami gwarantowana już na poziomie konstrukcji.</p>
+
+        <p class="no-dropcap">DBLF wygrało nie dlatego, że było najmądrzejsze. W obszarze twardych reguł fizycznych — przepisy ARBO, delikatność, LIFO — gwarancje są ważniejsze niż gęstość upakowania. Ciężarówka załadowana w 45&nbsp;% z okazjonalnie stłuczoną szybą jest gorsza niż załadowana w 33&nbsp;%, która nigdy nie powoduje takiej szkody.</p>
+
+        <div class="pull-quote">„RL było mistrzem upakowania. Nie potrafiło jednak obiecać, że nie złamie przepisów.”</div>
+
+        <figure class="case-figure" data-gallery="dkg-case">
+          <img
+            src="../../assets/dkg/streamlit-3d.png"
+            alt="Wizualizacja 3D załadowanej ciężarówki w Streamlit — szafki w kolorach sekwencji"
+            loading="lazy">
+          <figcaption>Rys. 01 — Prototyp Streamlit, wizualizacja 3D. Kolory oznaczają sekwencję; elementy delikatne na czerwonym szkielecie.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="case-section-label">
+        <span class="case-section-num">§ 05</span>
+        Moment z tabletem
+      </div>
+      <div class="case-prose">
+        <h2>Magazyn <em>nie ma czasu</em> na nasz dashboard 3D.</h2>
+        <p>W połowie listopada pokazaliśmy Jeroenowi z DKG interaktywny dashboard 3D. Obracanie ciężarówki, przybliżanie, kliknięcie w szafkę otwierające jej metadane. Byliśmy dumni. Reakcja Jeroena zmieściła się w kilku słowach — zbyt krótkich, by je złagodzić.</p>
+
+        <div class="pull-quote">„Ta wizualizacja może się nie sprawdzić — jest za skomplikowana.”</div>
+
+        <p class="no-dropcap">Wyjaśnił: pracownicy ekspedycji — z ciężkimi szafkami w rękach i zabrudzonymi dłońmi — nie będą obracać modeli 3D na tablecie. Potrzebują planu na papierze, czytanego wiersz po wierszu.</p>
+
+        <p class="no-dropcap">Zwrot w ciągu tygodnia. Nowy produkt: lista kontrolna w formacie PDF, w orientacji poziomej, sześć pozycji na stronę, próbki kolorów obok miniatury 3D, oznaczenia FRAGILE — delikatne (czerwone) i HEAVY — ciężkie (&gt;30&nbsp;kg). Naklejka na szafkę zawierała numer artykułu, numer sekwencji, wagę i strzałki THIS SIDE UP. Widok 3D pozostał w biurze. Magazyn dostał papier.</p>
+
+        <p class="no-dropcap">Ta rozmowa zamknęła fazę „algorytmów” i otworzyła fazę „produktu”.</p>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 2.5rem 0;">
+          <figure class="case-figure" data-gallery="dkg-case" style="margin: 0;">
+            <img
+              src="../../assets/dkg/checklist.png"
+              alt="Pozioma checklista PDF załadunku — sześć pozycji i widok 3D ciężarówki"
+              loading="lazy">
+            <figcaption>Rys. 02 — Drukowana lista kontrolna załadunku.</figcaption>
+          </figure>
+          <figure class="case-figure" data-gallery="dkg-case" style="margin: 0;">
+            <img
+              src="../../assets/dkg/sticker.png"
+              alt="Naklejka na szafkę — Article ID, numer sekwencji, ostrzeżenie HEAVY, strzałki THIS SIDE UP"
+              loading="lazy">
+            <figcaption>Rys. 03 — Naklejka na szafkę używana na hali.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="case-section-label">
+        <span class="case-section-num">§ 06</span>
+        Walidacja
+      </div>
+      <div class="case-prose">
+        <h2>Jak wyglądały <em>końcowe liczby</em> — i czego nie mierzyły.</h2>
+        <p>System zwalidowano na 2&nbsp;230 historycznych zleceniach transportowych obejmujących 1&nbsp;018&nbsp;368 pozycji.</p>
+
+        <div class="stat-block">
+          <div class="stat-block-item">
+            <span class="stat-label">Śr. stopień upakowania</span>
+            <span class="stat-value"><em>98,61</em>%</span>
+            <span class="stat-note">wobec 100% przy załadunku ręcznym</span>
+          </div>
+          <div class="stat-block-item">
+            <span class="stat-label">Zgodność LIFO</span>
+            <span class="stat-value"><em>99</em>%+</span>
+            <span class="stat-note">ręcznie: niemierzona</span>
+          </div>
+          <div class="stat-block-item">
+            <span class="stat-label">Zamówienia idealne</span>
+            <span class="stat-value"><em>41,4</em>%</span>
+            <span class="stat-note">923 z 2 230</span>
+          </div>
+          <div class="stat-block-item">
+            <span class="stat-label">W granicy 5%</span>
+            <span class="stat-value"><em>95,6</em>%</span>
+            <span class="stat-note">2 132 z 2 230</span>
+          </div>
+          <div class="stat-block-item">
+            <span class="stat-label">Naruszenia ograniczeń</span>
+            <span class="stat-value"><em>0</em></span>
+            <span class="stat-note">delikatność, waga, wysokość</span>
+          </div>
+          <div class="stat-block-item">
+            <span class="stat-label">Czas działania</span>
+            <span class="stat-value">~<em>2</em> min</span>
+            <span class="stat-note">na zamówienie 500–1000 pozycji</span>
+          </div>
+        </div>
+
+        <p class="no-dropcap">Różnica 1,39&nbsp;% zasługuje na osobne zdanie. To nie porażka algorytmu, lecz koszt gwarantowanej zgodności z regułami. Człowiek może przechylić element, ścisnąć opakowanie czy złamać LIFO, by wcisnąć ostatnią szafkę. Algorytm tego nie zrobi. Wdrożyliśmy wersję, która woli nie stłuc szyby.</p>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="case-section-label">
+        <span class="case-section-num">§ 07</span>
+        Moja rola
+      </div>
+      <div class="case-prose">
+        <h2>Nie odpowiadałem za <em>algorytm.</em> Odpowiadałem za <em>produkt.</em></h2>
+        <p>Zespół liczył pięć osób. Heurystyka DBLF była dziełem Ashrafa, model RL — Mohameda, rdzeń preprocessingu — Marka. Reszta, mierząc nakładem pracy, należała do mnie.</p>
+
+        <div class="owned-list">
+          <div class="owned-list-head">Za co odpowiadałem</div>
+          <ul>
+            <li>Trzy iteracje <em>raportów jakości danych</em> — od 25,5&nbsp;% do 99,5&nbsp;% użytecznych rekordów</li>
+            <li><em>Dokument wymagań biznesowych (BRD)</em> oraz interaktywna <em>macierz śledzenia wymagań</em></li>
+            <li><em>Pierwszy prototyp w Streamlit</em> — wczesny model RL z widokiem 3D; później przebudowany na heurystykę Bottom-Left</li>
+            <li><em>Warstwa etyczna i prawna</em> — regulamin użytkowania, lista kontrolna „Reality Gap”, mechanizm awaryjnego wyłączenia i oświadczenie o odpowiedzialności, pozycjonowanie systemu jako narzędzia wspomagającego decyzje (Decision Support System)</li>
+            <li>Dashboardy <em>Power BI</em> — porównanie modeli oraz widok zarządczy</li>
+            <li>Rola <em>Scrum Mastera</em> w ostatnim sprincie</li>
+            <li>Część etyczna i rekomendacje podczas <em>prezentacji końcowej u klienta</em></li>
+          </ul>
+        </div>
+
+        <figure class="case-figure" data-gallery="dkg-case">
+          <img
+            src="../../assets/dkg/kill-switch.png"
+            alt="Ekran umowy odpowiedzialności w Streamlit przed eksportem planu załadunku"
+            loading="lazy">
+          <figcaption>Rys. 04 — Ekran oświadczenia o odpowiedzialności w Streamlit. Pozycjonowanie jako system wspomagający decyzje w praktyce.</figcaption>
+        </figure>
+
+        <h3>Czego się nauczyłem.</h3>
+        <p class="no-dropcap">Wyrafinowanie nie jest wartością samą w sobie. W obszarze twardych ograniczeń „najmądrzejszy” model to ten, który potrafi udowodnić, że nie złamie reguły — a nie ten z najlepszym wynikiem w benchmarku. Rozwiązanie deterministyczne było tym właściwym. Musieliśmy pomylić się trzy razy, żeby to dostrzec.</p>
+
+        <p class="no-dropcap">Druga lekcja jest starsza — pochodzi z sześciu lat pracy na hali: <em>ludzie przy pracy potrzebują jednego zdania, by ocenić, że interfejs jest zły. Jeroenowi wystarczyło kilka słów. Posłuchaliśmy.</em></p>
+      </div>
+    </section>
+
+  </div>
+
+  <section class="case-footer-nav">
+    <div class="case-footer-nav-label">— Koniec materiału · 01 —</div>
+    <a href="../index.html#work">Powrót do Wydania 01</a>
+  </section>
+
+</div>
+
+<script src="../../js/main.js"></script>
+</body>
+</html>

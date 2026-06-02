@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pl" data-lang-en="../../case/atrio.html" data-lang-pl="./atrio.html">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Wyszukiwanie to łatwa część — Atrio · Mateusz Mosór · Materiał 02</title>
+<meta name="description" content="Atrio to asystent AI dla zespołów facility management. Projekt realizowany samodzielnie, około dwóch miesięcy w niepełnym wymiarze. Notatki o tym, czego RAG naprawdę wymaga poza wersją demonstracyjną.">
+<meta name="author" content="Mateusz Mosór">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Wyszukiwanie to łatwa część. Trudne są decyzje.">
+<meta property="og:description" content="Tworzenie Atrio — asystenta AI dla zespołów FM. Działające MVP w fazie iteracji. Projekt samodzielny.">
+<meta property="og:image" content="../../assets/og-image.png">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Wyszukiwanie to łatwa część. Trudne są decyzje.">
+<meta name="twitter:description" content="Tworzenie Atrio — asystenta AI dla zespołów FM. Notatki o RAG poza wersją demonstracyjną.">
+<meta name="twitter:image" content="../../assets/og-image.png">
+
+<link rel="alternate" hreflang="en" href="../../case/atrio.html">
+<link rel="alternate" hreflang="pl" href="./atrio.html">
+<link rel="alternate" hreflang="x-default" href="../../case/atrio.html">
+
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+
+<div class="progress-bar" aria-hidden="true"><div class="progress-bar-fill"></div></div>
+
+<div class="lightbox" role="dialog" aria-hidden="true" aria-label="Podgląd obrazu">
+  <button class="lightbox-btn lb-close" type="button" aria-label="Zamknij">×</button>
+  <button class="lightbox-btn lb-prev" type="button" aria-label="Poprzedni obraz">‹</button>
+  <button class="lightbox-btn lb-next" type="button" aria-label="Następny obraz">›</button>
+  <img alt="">
+  <div class="lb-counter"></div>
+</div>
+
+<div class="container">
+
+  <header class="masthead">
+    <div class="masthead-row">
+      <a class="masthead-back" href="../index.html">Wydanie 01 · Mosór</a>
+      <div class="masthead-nav-wrap">
+        <span style="color: var(--muted);">Materiał · 02 — Studium przypadku</span>
+        <div class="lang-switch" role="navigation" aria-label="Język">
+          <a class="lang-switch-link" href="../../case/atrio.html" hreflang="en" lang="en" data-lang-choice="en">EN</a>
+          <span class="lang-switch-sep" aria-hidden="true">·</span>
+          <a class="lang-switch-link is-active" href="./atrio.html" hreflang="pl" lang="pl" data-lang-choice="pl">PL</a>
+        </div>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Przełącz motyw">Ciemny</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="case-hero">
+    <div class="kicker">Materiał · 02 — LLM &amp; RAG · W toku</div>
+    <h1 class="case-hero-headline">
+      <em>Wyszukiwanie</em> to łatwa część.<br>
+      Trudne są <em>decyzje.</em>
+    </h1>
+    <p class="case-hero-dek">
+      Atrio to asystent AI dla zespołów facility management. Projekt realizowany
+      samodzielnie, około dwóch miesięcy w niepełnym wymiarze. Notatki o tym, czego
+      RAG naprawdę wymaga, gdy wychodzi się poza wersję demonstracyjną.
+    </p>
+    <div class="case-hero-meta">
+      <div class="case-hero-meta-item">Projekt<strong>Atrio — FM Chatbot</strong></div>
+      <div class="case-hero-meta-item">Status<strong>MVP · Iteracja · 2026</strong></div>
+      <div class="case-hero-meta-item">Typ<strong>Projekt samodzielny · Open-source</strong></div>
+      <div class="case-hero-meta-item">Stack<strong>Llama 3.1 · Next.js · FastAPI · Chroma · RAG</strong></div>
+      <div class="case-hero-meta-item">Repo<strong><a href="https://github.com/Attenersi/atrio-fm-chatbot" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent);">github.com/Attenersi/atrio-fm-chatbot ↗</a></strong></div>
+      <div class="case-hero-meta-item">Live<strong><a href="https://atrio-fm.com" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent);">atrio-fm.com ↗</a></strong></div>
+      <div class="case-hero-meta-item">Konto testowe<strong>operator / operator</strong></div>
+    </div>
+  </section>
+
+  <div class="case-body">
+
+    <section class="case-section">
+      <div class="case-section-label">
+        <span class="case-section-num">§ 01</span>
+        Założenia
+      </div>
+      <div class="case-prose">
+        <h2>Najemca pisze <em>jedno zdanie.</em> Ktoś musi z niego zrobić <em>ticket.</em></h2>
+        <p>Zespoły FM działają pomiędzy dwoma źródłami tarcia. Z jednej strony najemca, który chce naprawy i nie ma ani cierpliwości, ani znajomości terminologii z dokumentacji budynku. Z drugiej operator helpdesku, który musi przełożyć „winda na drugim piętrze hałasuje” na właściwą kategorię, priorytet, dane wykonawcy i ticket. Pomiędzy nimi leży dwustustronicowa dokumentacja, segregator procedur i czyjaś nieformalna wiedza o tym, który wykonawca obsługuje który kontrakt.</p>
+        <p class="no-dropcap">Atrio to moja propozycja tego, jak powinna wyglądać ta pośrednia warstwa. Czat dla najemcy lub helpdesku, model językowy osadzony w dokumentacji budynku oraz backend, który zamienia rozmowę w ustrukturyzowany ticket — automatycznie, z właściwą kategorią i priorytetem oraz odwołaniami do stron, na których oparto decyzję.</p>
+        <p class="no-dropcap">Tworzę go samodzielnie, jako projekt portfolio i open-source. Chatbot działa. Wyszukiwanie działa. Najciekawszy problem — i powód powstania tego studium przypadku — leży właśnie pomiędzy nimi.</p>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="case-section-label">
+        <span class="case-section-num">§ 02</span>
+        Co jest zbudowane
+      </div>
+      <div class="case-prose">
+        <h2>Czat to <em>widoczna</em> jedna trzecia produktu.</h2>
+        <p>Warstwa dostępna dla użytkownika to interfejs czatu. Pytanie trafia do systemu, odpowiedź pojawia się strumieniowo wraz ze źródłami, a jeśli w rozmowie pojawił się problem do zgłoszenia — jeden lub więcej ticketów trafia na dashboard. To około dwóch trzecich repozytorium. Reszta to panel administracyjny: dokumenty, luki w wiedzy, ewaluacja RAG, przegląd danych treningowych, kontrola jakości promptów i profile modeli. Najciekawsza praca jest właśnie po tej stronie.</p>
+        <p class="no-dropcap">Wersja na żywo: <a href="https://atrio-fm.com" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent);">atrio-fm.com ↗</a>, z kontem testowym operatora (<strong>login:</strong> operator, <strong>hasło:</strong> operator).</p>
+
+        <div class="owned-list">
+          <div class="owned-list-head">Co działa obecnie</div>
+          <ul>
+            <li><em>Czat ze strumieniowaniem odpowiedzi</em> — frontend Next.js, backend FastAPI, integracja zgodna z API OpenAI</li>
+            <li><em>RAG na dokumentacji budynku</em> z podaniem źródeł w odpowiedzi (<code style="font-family: var(--font-mono); font-size: 0.85em; padding: 0.15em 0.4em; background: var(--bg); border: 1px solid var(--rule);">used_sources</code>)</li>
+            <li><em>Automatyczne tworzenie ticketów</em> — także rozdzielanie wiadomości o wielu problemach na osobne tickety</li>
+            <li><em>Opcja „utwórz ticket mimo to”</em>, gdy model nie sklasyfikował zgłoszenia z wystarczającą pewnością</li>
+            <li><em>Dashboard ticketów</em> z filtrami, statusami i eksportem do CSV</li>
+            <li><em>Panel administracyjny</em> — dokumenty, luki w wiedzy, użytkownicy, ewaluacja RAG, przegląd danych treningowych, profile modeli</li>
+            <li><em>Zabezpieczenia</em> przed prompt injection oraz kontrola wrażliwych odpowiedzi na styku warstw</li>
+          </ul>
+        </div>
+
+        <figure class="case-figure" data-gallery="atrio-case">
+          <img
+            src="../../assets/atrio/chat-rag.png"
+            alt="Interfejs czatu Atrio z odpowiedzią opartą na dokumentacji i utworzonym ticketem"
+            loading="lazy">
+          <figcaption>Rys. 01 — Czat z odpowiedzią opartą na źródłach wraz z odwołaniami.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="case-section-label">
+        <span class="case-section-num">§ 03</span>
+        Wyszukiwanie
+      </div>
+      <div class="case-prose">
+        <h2>Wyszukiwanie okazało się <em>łatwe</em> — i to mnie zaskoczyło.</h2>
+        <p>W każdym projekcie RAG pierwsza uwaga kieruje się na warstwę wyszukiwania: baza wektorowa, embeddingi, zapytania, fragmenty dokumentów, model językowy. Zanim napisałem pierwszą linię kodu, przeczytałem kilkanaście artykułów naukowych i dwa razy tyle wpisów na blogach. Stos technologiczny złożył się szybko. Chroma lokalnie, w trybie trwałym, dokumenty FM z zestawu startowego (demonstracyjny „Meridian Business Center”). Zapytanie, top-<em>k</em>, fragmenty w prompcie, odpowiedź wraz ze źródłami.</p>
+        <p class="no-dropcap">Działający chatbot powstał w pierwsze dwa tygodnie. Mylący kamień milowy.</p>
+
+        <div class="pull-quote">„Wyszukiwanie prowadzi do «jakiejś» odpowiedzi. Nie do «właściwej».”</div>
+
+        <p class="no-dropcap">Nie doceniłem, ile jakości leży poza samym wyszukiwaniem. Strategia dzielenia dokumentu na fragmenty — gdzie go ciąć — bywa ważniejsza niż zmiana modelu embeddingów. Ponowne rankowanie wyników przed promptem daje więcej niż strojenie parametru top-<em>k</em>. Gdy wyszukiwanie działa jak należy, rozmowa nie dotyczy już wyszukiwania, lecz tego, co model zrobi z fragmentami. O tym jest kolejna sekcja.</p>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="case-section-label">
+        <span class="case-section-num">§ 04</span>
+        Decyzje
+      </div>
+      <div class="case-prose">
+        <h2>Najtrudniejsza decyzja: czy w ogóle <em>tworzyć ticket.</em></h2>
+        <p>Wiadomość od najemcy: <em>„W sali spotkań nr 3 jest zimno, a drukarka przy recepcji znów się zacięła. Możecie to sprawdzić?”</em> Dwa niezwiązane ze sobą problemy, różne kategorie i priorytety w jednym zdaniu. Czasem jest to samo pytanie (<em>„jakie jest hasło do WiFi dla gości?”</em>). Czasem incydent ukryty w pytaniu (<em>„czy mamy procedurę na alarm drzwiowy w nocy? Bo właśnie się włączył”</em>). A czasem atak — prompt injection podszywający się pod skargę.</p>
+
+        <p class="no-dropcap">Każdy z tych przypadków wymaga innej reakcji:</p>
+        <ul style="margin: 1rem 0 1.5rem 0; padding-left: 1.5rem; color: var(--ink-soft); font-size: 17px; line-height: 1.7;">
+          <li>Wiele problemów → osobny ticket dla każdego, klasyfikowane niezależnie</li>
+          <li>Samo pytanie → odpowiedź ze źródłami, bez tworzenia ticketu</li>
+          <li>Ukryty incydent → odpowiedź <em>oraz</em> ticket</li>
+          <li>Prompt injection → odmowa i zapis w logu, bez ingerencji w warstwę ticketów</li>
+        </ul>
+
+        <p class="no-dropcap">Podejście hybrydowe z założenia. Model zwraca ustrukturyzowany JSON — intencję, listę problemów, sugerowane kategorie i priorytety. Backend przepuszcza to przez zabezpieczenia i reguły przed zapisem: deduplikację względem otwartych ticketów, limity priorytetów, nadpisania kategorii, wykrywanie wzorców prompt injection. Model proponuje, backend decyduje. Function calling byłby w teorii czystszy, ale zależało mi na warstwie reguł, która jest czytelna, wersjonowana i edytowalna bez ponownego wdrażania integracji z modelem.</p>
+
+        <div class="pull-quote">„Model proponuje. Backend decyduje. Reguły żyją w repozytorium — integracja z modelem nie.”</div>
+
+        <p class="no-dropcap">To tutaj spędzam większość czasu w kolejnych iteracjach. Jakość wyszukiwania zmienia się powoli — wystarczy mierzyć ją raz w tygodniu. Jakość decyzji zmienia się w chwili dodania nowej kategorii, budynku czy przypadku brzegowego.</p>
+
+        <figure class="case-figure" data-gallery="atrio-case">
+          <img
+            src="../../assets/atrio/multi-ticket.png"
+            alt="Chat Atrio — jedna wiadomość tworzy wiele ticketów serwisowych"
+            loading="lazy">
+          <figcaption>Rys. 02 — Jedna wiadomość, dwa tickety. Rozdzielanie wielu problemów widoczne na dashboardzie.</figcaption>
+        </figure>
+
+        <figure class="case-figure" data-gallery="atrio-case">
+          <img
+            src="../../assets/atrio/dashboard.png"
+            alt="Dashboard operacyjny Atrio z kategoriami, priorytetami i listą ticketów"
+            loading="lazy">
+          <figcaption>Rys. 03 — Dashboard ticketów, czyli operacyjna strona produktu.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="case-section-label">
+        <span class="case-section-num">§ 05</span>
+        Warstwa decyzji
+      </div>
+      <div class="case-prose">
+        <h2>Reguły żyją w <em>kodzie</em>, nie w prompcie.</h2>
+        <p>Jeśli wyszukiwanie to ta łatwa jedna trzecia, a czat — widoczna jedna trzecia, to warstwa decyzji jest tą częścią, która naprawdę się liczy, a o którą nikt nie pyta podczas demonstracji. To kod pomiędzy propozycją modelu a tym, co system faktycznie zapisuje: deduplikacja, limity priorytetów, nadpisania kategorii, ścieżka odmowy przy prompt injection. Model przekazuje ustrukturyzowaną propozycję; ta warstwa rozstrzyga, co z niej wynika. Reguły są w kodzie, nie w prompcie — mogę je czytać, testować i zmieniać pojedynczo, bez renegocjowania integracji z modelem.</p>
+
+        <p class="no-dropcap">Tej warstwy trzeba bronić, a nie tylko ją zbudować. Model, który myli się z dużą pewnością raz na pięćdziesiąt wiadomości, jest niewidoczny w demonstracji i groźny w skali. Dlatego praca polega głównie na odejmowaniu: na określaniu, czego model <em>nie może</em> zrobić samodzielnie. Utworzyć duplikat już śledzonego problemu. Podnieść rutynową kategorię do najwyższego priorytetu. Wykonać polecenie z prompt injection podszytego pod skargę. Każdy z tych przypadków to reguła, a nie pobożne życzenie.</p>
+
+        <div class="pull-quote">„W produkcie opartym na LLM liczy się nie to, co model potrafi, lecz to, co świadomie odebrano mu prawa robić samodzielnie.”</div>
+
+        <p class="no-dropcap">Zestaw testów ewaluacyjnych utrzymuje tę warstwę w ryzach. To plik ręcznie dobranych przypadków oraz mechanizm oceniający system. Dwie liczby: czy system w ogóle odpowiedział i czy odpowiedział <em>poprawnie</em>, po odjęciu błędów transmisji. Pierwsza mówi, czy system stoi. Druga — czy ma rację. Trudna rozmowa → przegląd → nowy przypadek testowy → korekta reguły lub promptu → ponowny przebieg. Wzrost poprawności wyznacza nowy punkt odniesienia. Brak wzrostu oznacza wycofanie zmiany. Ewaluacja nie jest produktem — chroni przed oszukiwaniem samego siebie co do jakości warstwy decyzji.</p>
+
+        <figure class="case-figure" data-gallery="atrio-case">
+          <img
+            src="../../assets/atrio/admin-eval.png"
+            alt="Panel admina Atrio do strojenia zachowania warstwy decyzji"
+            loading="lazy">
+          <figcaption>Rys. 04 — Panel administracyjny, w którym stroi się warstwę decyzji i przeprowadza ponowną ewaluację.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="case-section-label">
+        <span class="case-section-num">§ 06</span>
+        Plany
+      </div>
+      <div class="case-prose">
+        <h2>Co <em>dalej.</em> Czego <em>nie</em> buduję.</h2>
+        <p>Najbliższe dwa tygodnie to jakość, a nie nowe funkcje. Lepsze ponowne rankowanie wyników przed modelem. Bardziej restrykcyjne reguły dla kategorii, które najczęściej są mylone. Pełniejszy proces przeglądu w panelu administracyjnym — korekta błędnej decyzji w kilka minut zamiast kolejnego wdrożenia. Konkretnie: mierzalny wzrost poprawności na zbiorze ewaluacyjnym, zanim dodam cokolwiek nowego.</p>
+
+        <h3>Świadomie poza zakresem.</h3>
+        <p class="no-dropcap"><strong>Infrastruktura klasy enterprise.</strong> Bez SSO, architektury wielodostępowej i certyfikacji SOC 2. To problemy produktu z płacącymi użytkownikami; Atrio ich nie ma i nie zamierzam tego udawać.</p>
+        <p class="no-dropcap"><strong>Rozbudowana analityka.</strong> Dashboard operacyjny w stylu Power BI buduje się wtedy, gdy decyzje są już wiarygodne. Moje jeszcze nie są.</p>
+        <p class="no-dropcap"><strong>Dopracowanie UX.</strong> Interfejs wygląda jak środowisko programisty. Estetyka może poczekać — teraz byłaby ucieczką od trudniejszej pracy.</p>
+
+        <p class="no-dropcap">Stawiam na niezawodność decyzji jako jedyną rzecz wartą optymalizacji na tym etapie. Reszta to rozproszenie uwagi udające postęp.</p>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="case-section-label">
+        <span class="case-section-num">§ 07</span>
+        Wnioski
+      </div>
+      <div class="case-prose">
+        <h2>Artykuły naukowe nie opisują <em>drugiej połowy.</em></h2>
+        <p>Praca nad tym projektem zmieniła mój sposób myślenia o systemach RAG. Artykuły pięknie opisują warstwę wyszukiwania i na tym kończą. Prawdziwa praca zaczyna się po stronie fragmentów: jak dzieli się dokumenty, co umieszcza przed kontekstem i po nim, co robi się z odpowiedzią modelu, zanim dotknie reszty systemu, oraz jak sprawdza się, czy wczorajsza zmiana nie zepsuła dzisiejszego działania.</p>
+
+        <p class="no-dropcap">Drugie zaskoczenie: jak wiele pracy ma charakter <em>obronny</em>. Model, który myli się z dużą pewnością raz na pięćdziesiąt przypadków, nie jest problemem na demonstracji, a staje się poważny w skali. Duża część projektu poszła w zabezpieczenia — przed prompt injection, na deduplikację, limity priorytetów, nadpisania i warstwę odmowy. Mało efektowne, a właśnie to oddziela prototyp od systemu pracującego na prawdziwej kolejce ticketów.</p>
+
+        <p class="no-dropcap">Podsumowanie w jednym zdaniu: <em>uruchomienie modelu językowego przestało być trudne. Kontrolowanie jego zachowania na nieuporządkowanych danych z prawdziwego świata — to cała praca.</em></p>
+      </div>
+    </section>
+
+  </div>
+
+  <section class="case-footer-nav">
+    <div class="case-footer-nav-label">— Koniec materiału · 02 —</div>
+    <a href="../index.html#work">Powrót do Wydania 01</a>
+  </section>
+
+</div>
+
+<script src="../../js/main.js"></script>
+</body>
+</html>
